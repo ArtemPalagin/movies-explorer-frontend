@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Header from '../Header/Header.js';
 import Footer from '../Footer/Footer.js';

@@ -8,6 +8,8 @@
 }
 .promo__logo{
   position: absolute;
+  width: 320px;
+  z-index: 2;
 }
 .promo__heading{
   font-style: normal;
@@ -27,28 +29,28 @@
     height: 570px;
   }
   .promo__logo{
-    height: calc((100%*8/56) + (1376px/7));
+    height: calc((100vw - 13.7px)*8/56 + (1376px/7));
   }
 }
 @media screen and (min-width: 320px) and (max-width: 768px){
   .promo__heading{
-      font-size: calc((100%*19/448) + (122px/7));
-      line-height: calc((100%*19/448) + (178px/7));
+      font-size: calc((100vw - 13.7px)*19/448 + (122px/7));
+      line-height: calc((100vw - 13.7px)*19/448 + (178px/7));
   }
   .promo{
-    height: calc((100%*107/224) + (2920px/7));
+    height: calc((100vw - 13.7px)*107/224 + (2920px/7));
   }
   .promo__logo{
-    height: calc((100%*8/56) + (1376px/7));
+    height: calc((100vw - 13.7px)*8/56 + (1376px / 7));
   }
 }
 @media screen and (min-width: 768px) and (max-width: 1280px){
   .promo__heading{
-      font-size: 50;
-      line-height: 58;
+      font-size: 50px;
+      line-height: 58px;
   }
   .promo{
-    height: calc((100%*-65/128) + 1174px);
+    height: calc((100vw - 13.7px)*-65/128 + 1174px);
   }
   .promo__logo{
     height: 320px;

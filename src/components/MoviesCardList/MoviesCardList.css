@@ -1,0 +1,23 @@
+ .movies-cardList{
+display: grid;
+}
+/* @media screen and (max-width: 320px){
+  .movies-cardList{
+
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 768px){
+  .movies-cardList{
+
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1280px){
+  .movies-cardList{
+
+  }
+}
+@media screen and (min-width: 1280px){
+  .movies-cardList{
+
+  }
+}  */

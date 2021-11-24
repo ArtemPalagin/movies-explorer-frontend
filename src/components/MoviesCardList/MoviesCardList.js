@@ -1,4 +1,5 @@
 import MoviesCard from '../MoviesCard/MoviesCard.js';
+import './MoviesCardList.css';
 
 function MoviesCardList(props){
   return(

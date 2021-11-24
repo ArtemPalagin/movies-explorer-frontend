@@ -1,4 +1,5 @@
 import likeDeactivates from '../../images/like-deactivates';
+import './MoviesCard.css';
 
 function MoviesCard(props){
   return(

@@ -1,4 +1,5 @@
 import promoLogo from '../../images/promo-logo.svg';
+import './Promo.css';
 
 function Promo(props) {
   return(

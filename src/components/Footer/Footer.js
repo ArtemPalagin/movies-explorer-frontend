@@ -1,3 +1,5 @@
+import './Footer.css';
+
 function Footer(props){
   return(
     <section className="footer">

@@ -1,4 +1,5 @@
 import avatar from '../../images/top-tab-logo.svg';
+import './AboutMe.css';
 
 function AboutMe(props){
   return(
