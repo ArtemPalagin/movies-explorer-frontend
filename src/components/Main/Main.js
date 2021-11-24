@@ -5,6 +5,8 @@ import Techs from '../Techs/Techs.js';
 import AboutMe from '../AboutMe/AboutMe.js';
 import Portfolio from '../Portfolio/Portfolio.js';
 import Register from '../Register/Register.js';
+import Login from '../Login/Login.js';
+import Profile from '../Profile/Profile.js';
 function Main(props) {
   return(
     <main className="main">
@@ -14,7 +16,9 @@ function Main(props) {
           <Techs />
           <AboutMe />
           <Portfolio /> */}
-          <Register />
+          {/* <Register /> */}
+          {/* <Login /> */}
+          <Profile />
     </main>
   );
 }

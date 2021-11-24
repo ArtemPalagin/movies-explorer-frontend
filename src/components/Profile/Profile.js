@@ -1,12 +1,22 @@
+import './Profile.css';
+
 function Profile(props){
   return(
     <section className="profile">
       <h1 className="profile__greeting">Привет, Артём!</h1>
-        <input className="profile__inpute profile__inpute-username"  id="username-input" type="text" placeholder="Имя" name="username" minLength="2" maxLength="40" />
-        <span className="username-input-error profile__span"></span>
-        <input className="profile__inpute profile__impute-email"  id="email-input" type="text" placeholder="Email" name="email" minLength="2" maxLength="200" />
-        <span className="email-input-error profile__span"></span>
-        <button className="profile__editing">Редактировать</button>
+      <form className="profile__form">
+        <div className="profile__inpute-wrapper">
+          <p className="profile__placeholder">Имя</p>
+          <input className="profile__inpute profile__inpute-email"  id="email-input" type="email" name="username" minLength="2" maxLength="40" />
+        </div>
+        <div className="profile__inpute-wrapper">
+          <p className="profile__placeholder">Email</p>
+          <input className="profile__inpute profile__impute-password"  id="password-input" type="password" name="email" minLength="2" maxLength="200" />
+          <span className="profile__span">что то пошло не так ...</span>
+        </div>
+          
+          <button className="profile__editing">Редактировать</button>
+        </form>
         <button className="profile__exit">Выйти из аккаунта</button>
     </section>
   )

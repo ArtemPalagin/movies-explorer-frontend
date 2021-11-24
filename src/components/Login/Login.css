@@ -1,23 +1,22 @@
-.register{
+.login{
   display: flex;
   flex-direction: column;
 }
-.register__image{
+.login__image{
   width: 38px;
   height: 38px;
 }
-.register__greeting{
+.login__greeting{
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
   align-items: 29px;
-
 }
-.register__form{
+.login__form{
   display: flex;
   flex-direction: column;
 }
-.register__placeholder{
+.login__placeholder{
   margin: 0;
   margin-bottom: 10px;
   color: #A0A0A0;
@@ -27,7 +26,7 @@
   line-height: 12px;
   text-align: left;
 }
-.register__inpute{
+.login__inpute{
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
@@ -42,16 +41,16 @@
   border: none;
   outline: none;
 }
-.register__inpute-username:invalid{
+.login__inpute-username:invalid{
   color: #FF3055;
 }
-.register__inpute-email:invalid{
+.login__inpute-email:invalid{
   color: #FF3055;
 }
-.register__inpute-password:invalid{
+.login__inpute-password:invalid{
   color: #FF3055;
 }
-.register__span{
+.login__span{
   display: none;
   position: absolute;
   margin-top: 10px;
@@ -62,10 +61,10 @@
   text-align: left;
   color: #FF3055;
 }
-.register__span_active{
+.login__span_active{
   display: block;
 }
-.register__button{
+.login__button{
   background-color: #3456F3;
   color: white;
   border-radius: 3px;
@@ -75,18 +74,18 @@
   border: none;
   cursor: pointer;
 }
-.register__link-wrapper{
+.login__link-wrapper{
   display: flex;
   justify-content: center;
 }
-.register__link-text{
+.login__link-text{
   margin: 0;
   font-style: normal;
   font-weight: 400;
   text-align: center;
   columns: #A0A0A0;
 }
-.register__link{
+.login__link{
   margin: 0;
   margin-left: 6px;
   font-style: normal;
@@ -95,135 +94,135 @@
   color: #3456F3;
   cursor: pointer;
 }
-.register__link:hover{
+.login__link:hover{
   opacity: 0.6;
 }
 
 @media screen and (max-width: 320px) {
-  .register {
+  .login {
     padding-left: calc((100vw - 13.7px)*39/112 + (-570px/7));
     padding-right: calc((100vw - 13.7px)*39/112 + (-570px/7));
     padding-top: 56px;
     padding-bottom: 30px;
   }
-  .register__image{
+  .login__image{
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 50px;
   }
-  .register__greeting{
+  .login__greeting{
     margin-bottom: 80px;
     text-align: center;
   }
-  .register__button{
+  .login__button{
     font-size: 12px;
     line-height: 15px;
     padding-top: 15px;
     padding-bottom: 15px;
-    margin-top: 159px;
+    margin-top: 245px;
     margin-bottom: 14px;
   }
-  .register__link-text{
+  .login__link-text{
     font-size: 12px;
     line-height: 15px;
   }
-  .register__link{
+  .login__link{
     font-size: 12px;
     line-height: 15px;
   }
 }
 
 @media screen and (min-width: 320px) and (max-width: 768px) {
-  .register {
+  .login {
     padding-left: calc((100vw - 13.7px)*39/112 + (-570px/7));
     padding-right: calc((100vw - 13.7px)*39/112 + (-570px/7));
     padding-top: calc((100vw - 13.7px)*11/28 + (-488px/7));
     padding-bottom: calc((100vw - 13.7px)*101/224 + (-800px/7));
   }
-  .register__image{
+  .login__image{
     margin-bottom: calc((100vw - 13.7px)*-5/224 + (400px/7));
   }
-  .register__greeting{
+  .login__greeting{
     margin-bottom: calc((100vw - 13.7px)*-5/56 + (760px/7));
     text-align: left;
   }
-  .register__button{
+  .login__button{
     font-size: calc((100vw - 13.7px)/224 + (74px/7));
     line-height: calc((100vw - 13.7px)/224 + (95px/7));
     padding-top: calc((100vw - 13.7px)/224 + (81px/7));
     padding-bottom: calc((100vw - 13.7px)/224 + (81px/7));
-    margin-top: calc((100vw - 13.7px)*-11/56 + (1553px/7));
+    margin-top: calc((100vw - 13.7px)*-11/56 + (2155px/7));
     margin-bottom: calc((100vw - 13.7px)/224 + (88px/7));
   }
-  .register__link-text{
+  .login__link-text{
     font-size: calc((100vw - 13.7px)/224 + (74px/7));
     line-height: calc((100vw - 13.7px)/224 + (95px/7));
   }
-  .register__link{
+  .login__link{
     font-size: calc((100vw - 13.7px)/224 + (74px/7));
     line-height: calc((100vw - 13.7px)/224 + (95px/7));
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1280px) {
-  .register {
+  .login {
     padding-left: calc((100vw - 13.7px)/2 + (-198px));
     padding-right: calc((100vw - 13.7px)/2 + (-198px));
     padding-top: calc((100vw - 13.7px)*-81/256 + (475px));
     padding-bottom: calc((100vw - 13.7px)*-81/256 + (475px));
   }
-  .register__image{
+  .login__image{
     margin-bottom: 40px;
   }
-  .register__greeting{
+  .login__greeting{
     margin-bottom: 40px;
     text-align: left;
   }
-  .register__button{
+  .login__button{
     font-size: 14px;
     line-height: 17px;
     padding-top: 13px;
     padding-bottom: 13px;
-    margin-top: 71px;
+    margin-top: 157px;
     margin-bottom: 18px;
   }
-  .register__link-text{
+  .login__link-text{
     font-size: 14px;
     line-height: 17px;
   }
-  .register__link{
+  .login__link{
     font-size: 14px;
     line-height: 17px;
   }
 }
 
 @media screen and (min-width: 1280px) {
-  .register {
+  .login {
     padding-left: calc((100vw - 13.7px)/2 + (-198px));
     padding-right: calc((100vw - 13.7px)/2 + (-198px));
     padding-top: 70px;
     padding-bottom: 70px;
   }
-  .register__image{
+  .login__image{
     margin-bottom: 40px;
   }
-  .register__greeting{
+  .login__greeting{
     margin-bottom: 40px;
     text-align: left;
   }
-  .register__button{
+  .login__button{
     font-size: 14px;
     line-height: 17px;
     padding-top: 13px;
     padding-bottom: 13px;
-    margin-top: 71px;
+    margin-top: 157px;
     margin-bottom: 18px;
   }
-  .register__link-text{
+  .login__link-text{
     font-size: 14px;
     line-height: 17px;
   }
-  .register__link{
+  .login__link{
     font-size: 14px;
     line-height: 17px;
   }
