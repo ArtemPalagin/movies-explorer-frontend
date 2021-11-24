@@ -4,15 +4,17 @@ import AboutProject from '../AboutProject/AboutProject.js';
 import Techs from '../Techs/Techs.js';
 import AboutMe from '../AboutMe/AboutMe.js';
 import Portfolio from '../Portfolio/Portfolio.js';
+import Register from '../Register/Register.js';
 function Main(props) {
   return(
     <main className="main">
-          <Promo />
+          {/* <Promo />
           <NavTab />
           <AboutProject />
           <Techs />
           <AboutMe />
-          <Portfolio />
+          <Portfolio /> */}
+          <Register />
     </main>
   );
 }
