@@ -9,7 +9,7 @@
   font-weight: 400;
   text-align: center;
   color: #A0A0A0;
-  border-bottom: 1px #E8E8E8;
+  border-bottom: 1px #E8E8E8 solid;
 }
 
 .footer__wrapper {
@@ -20,18 +20,20 @@
   font-style: normal;
   font-weight: 400;
   text-align: left;
-  
+  color: #A0A0A0;
 }
 .footer__links-wrapper{
   display: flex;
   justify-content: space-between;
+}
+.footer__link{
+  color: black;
   text-decoration: none;
   cursor: pointer;
 }
-.footer__links-wrapper:hover{
+.footer__link:hover{
   opacity: 0.6;
 }
-
 @media screen and (max-width: 320px) {
   .footer {
     padding-left: calc((100vw - 13.7px)*5/112 + (-30px/7));
@@ -53,6 +55,7 @@
     font-size: calc((100vw - 13.7px)/448 + (79px/7));
     line-height: calc((100vw - 13.7px)/448 + (100px/7));
     margin-bottom: 10px;
+    text-align: center;
   }
   .footer__links-wrapper{
     font-size: calc((100vw - 13.7px)/448 + (79px/7));
@@ -60,6 +63,11 @@
     flex-direction: column;
     margin-bottom: 30px;
     height: calc((100vw - 13.7px)*5/448 + (458px/7));
+  }
+  .footer__link{
+    font-size: calc((100vw - 13.7px)/448 + (79px/7));
+    line-height: calc((100vw - 13.7px)/448 + (100px/7));
+    text-align: center;
   }
 }
 
@@ -83,6 +91,7 @@
     font-size: calc((100vw - 13.7px)/448 + (79px/7));
     line-height: calc((100vw - 13.7px)/448 + (100px/7));
     margin-bottom: 10px;
+    text-align: center;
   }
   .footer__links-wrapper{
     font-size: calc((100vw - 13.7px)/448 + (79px/7));
@@ -90,6 +99,11 @@
     flex-direction: column;
     margin-bottom: 30px;
     height: calc((100vw - 13.7px)*5/448 + (458px/7));
+  }
+  .footer__link{
+    font-size: calc((100vw - 13.7px)/448 + (79px/7));
+    line-height: calc((100vw - 13.7px)/448 + (100px/7));
+    text-align: center;
   }
 }
 
@@ -119,6 +133,10 @@
     width: 263px;
     align-items: center;
   }
+  .footer__link{
+    font-size: 13px;
+    line-height: 16px;
+  }
 }
 
 @media screen and (min-width: 1280px) {
@@ -146,5 +164,9 @@
     line-height: 16px;
     width: 263px;
     align-items: center;
+  }
+  .footer__link{
+    font-size: 13px;
+    line-height: 16px;
   }
 }

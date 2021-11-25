@@ -7,7 +7,7 @@
 .about-project__heading {
   margin: 0;
   width: auto;
-  border-bottom: black 1px;
+  border-bottom: black 1px solid;
   font-style: normal;
   font-weight: 400;
   text-align: left;
@@ -166,11 +166,26 @@
     padding-bottom: calc((100vw - 13.7px)/128 + (16px));
   }
   .about-project__title:last-of-type{
-    padding-left: calc((100vw - 13.7px)*5/512 + (15px/2));
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+  .about-project__title:first-of-type{
+        padding-left: calc((100vw - 13.7px)*5/512 + (15px/2));
   }
   .about-project__text{
     font-size: 14px;
     line-height: 20px;
+  }
+  .about-project__text:first-of-type{
+    padding-left: calc((100vw - 13.7px)*5/512 + (15px/2));
+}
+  .about-project__text:last-of-type{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
   }
   .about-project__progress-bar-interval{
     font-size: 14px;
@@ -210,11 +225,26 @@
     padding-bottom: calc((100vw - 13.7px)/128 + (16px));
   }
   .about-project__title:last-of-type{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+  .about-project__title:first-of-type{
     padding-left: 20px;
   }
   .about-project__text{
     font-size: 14px;
     line-height: 20px;
+  }
+  .about-project__text:first-of-type{
+    padding-left: 20px;
+  }
+  .about-project__text:last-of-type{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
   }
   .about-project__progress-bar-interval{
     font-size: 14px;

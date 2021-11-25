@@ -8,8 +8,7 @@
 }
 .promo__logo{
   position: absolute;
-  width: 320px;
-  z-index: 2;
+  opacity: 0.2;
 }
 .promo__heading{
   font-style: normal;
@@ -18,7 +17,8 @@
   line-height: 15px;
   text-align: center;
   color: #FFFFFF;
-  z-index: 1;
+  max-width:  730px;
+  letter-spacing: -0.04em;
 }
 @media screen and (max-width: 320px){
   .promo__heading{

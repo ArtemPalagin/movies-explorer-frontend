@@ -19,7 +19,7 @@
 }
 .profile__inpute-wrapper:first-of-type{
   padding-bottom: 16px;
-  border-bottom: 1px #E8E8E8;
+  border-bottom: 1px #E8E8E8 solid;
 }
 .profile__inpute-wrapper:last-of-type{
   padding-top: 17px;
@@ -42,11 +42,14 @@
   direction: rtl;
   width: 100%;
 }
+.profile__inpute-username:invalid{
+  color: #FF3055;
+}
 .profile__inpute-email:invalid{
   color: #FF3055;
 }
-.profile__inpute-password:invalid{
-  color: #FF3055;
+.profile__inpute-email{
+  margin-bottom: 0;
 }
 .profile__span{
   display: none;

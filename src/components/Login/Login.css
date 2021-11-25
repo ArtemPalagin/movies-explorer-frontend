@@ -50,6 +50,9 @@
 .login__inpute-password:invalid{
   color: #FF3055;
 }
+.login__inpute-password{
+  margin-bottom: 0;
+}
 .login__span{
   display: none;
   position: absolute;

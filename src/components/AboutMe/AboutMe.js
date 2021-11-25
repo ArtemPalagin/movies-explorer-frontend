@@ -1,4 +1,3 @@
-import avatar from '../../images/top-tab-logo.svg';
 import './AboutMe.css';
 
 function AboutMe(props){
@@ -9,13 +8,13 @@ function AboutMe(props){
         <div className="about-me__text-wrapper">
           <h3 className="about-me__name">Артём</h3>
           <h4 className="about-me__specialization">Фронтенд-разработчик, 19 лет</h4>
-          <p className="about-me__text">Я родился и живу в Москве...</p>
+          <p className="about-me__text">Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.</p>
           <div className="about-me__links-wrapper">
             <a className="about-me__link" href="#">Facebook</a>
             <a className="about-me__link" href="#">Github</a>
           </div>
         </div>
-        <img className="about-me__avatar" src={avatar} alt="Не получилось загрузить фото студента" />
+        <img className="about-me__avatar" src="https://oir.mobi/uploads/posts/2021-05/1622262892_61-oir_mobi-p-krasivie-vidi-prirodi-priroda-krasivo-foto-65.jpg" alt="Не получилось загрузить фото студента" />
       </div>
     </section>
   )

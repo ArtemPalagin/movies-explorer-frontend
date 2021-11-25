@@ -7,7 +7,10 @@
 .techs__heading {
   margin: 0;
   width: auto;
-  border-bottom: black 1px;
+  /* padding-left: 100%;
+  padding-right: 100%; */
+  align-self: stretch;
+  border-bottom: black 1px solid;
   font-style: normal;
   font-weight: 400;
   text-align: left;
@@ -21,6 +24,8 @@
   font-style: normal;
   font-weight: 400;
   text-align: center;
+  letter-spacing: -0.04em;
+  max-width: 460px;
 }
 .techs__list{
   margin: 0;

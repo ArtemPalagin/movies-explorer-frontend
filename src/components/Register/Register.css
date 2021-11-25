@@ -51,6 +51,9 @@
 .register__inpute-password:invalid{
   color: #FF3055;
 }
+.register__inpute-password{
+  margin-bottom: 0;
+}
 .register__span{
   display: none;
   position: absolute;
