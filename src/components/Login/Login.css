@@ -96,6 +96,7 @@
   text-align: center; 
   color: #3456F3;
   cursor: pointer;
+  text-decoration: none;
 }
 .login__link:hover{
   opacity: 0.6;

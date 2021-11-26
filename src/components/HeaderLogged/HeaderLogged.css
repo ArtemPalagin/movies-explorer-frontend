@@ -26,8 +26,10 @@
   font-weight: 400;
   line-height: 18px;
   margin-right: 20px;
+  color: black;
+  text-decoration: none;
 }
-.header_logged__link_active{
+.header_logged__movies-link:hover{
   font-weight: 500;
 }
 .header_logged__saved-movies-link{
@@ -37,6 +39,11 @@
   font-weight: 400;
   line-height: 18px;
   margin-right: 50px;
+  color: black;
+  text-decoration: none;
+}
+.header_logged__saved-movies-link:hover{
+  font-weight: 500;
 }
 .header_logged__account-link{
   margin: 0;
@@ -45,6 +52,11 @@
   font-weight: 400;
   line-height: 16px;
   margin-right: 17px;
+  color: black;
+  text-decoration: none;
+}
+.header_logged__account-link:hover{
+  font-weight: 500;
 }
 .header_logged__account-image{
   width: 12px;

@@ -1,5 +1,6 @@
 import loginImage from '../../images/register-image.svg';
 import './Login.css';
+import { Link } from 'react-router-dom';
 
 
 function Login(props){
@@ -17,7 +18,7 @@ function Login(props){
       </form>
       <div className="login__link-wrapper">
         <p className="login__link-text">Ещё не зарегистрированы?</p>
-        <p className="login__link">Регистрация</p>
+        <Link to="/register" className="login__link">Регистрация</Link>
       </div>
       
     </section>

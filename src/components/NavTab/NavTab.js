@@ -3,9 +3,9 @@ import './NavTab.css';
 function NavTab(props){
   return(
     <section className="nav-tab">
-      <d className="nav-tab__link">О проекте</d>
-      <d className="nav-tab__link">Технологии</d>
-      <d className="nav-tab__link">Студент</d>
+      <a className="nav-tab__link" href="#about-project">О проекте</a>
+      <a className="nav-tab__link" href="#techs">Технологии</a>
+      <a className="nav-tab__link" href="#about-me">Студент</a>
     </section>
   )
 }

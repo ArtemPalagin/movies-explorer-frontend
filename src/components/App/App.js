@@ -54,8 +54,19 @@ class App extends React.Component {
   render() {
     return (
       <div className="page">
-        {/* <Header /> */}
-        <HeaderLogged />
+
+        <Switch>
+
+          <Route exact path="/">
+            <Header />
+          </Route>
+
+          <Route exact path={["/movies", "/saved-movies", "/profile"]}>
+            <HeaderLogged />
+          </Route>
+
+        </Switch>
+
         <Switch>
 
           <Route exact path="/">
@@ -88,7 +99,14 @@ class App extends React.Component {
             component={Profile} />
 
         </Switch>
-        <Footer />
+
+        <Switch>
+          
+          <Route exact path={["/", "/movies", "/saved-movies", "/profile"]}>
+            <Footer />
+          </Route>
+
+        </Switch>
 
       </div>
     )
