@@ -11,7 +11,7 @@ import Profile from '../Profile/Profile.js';
 import Login from '../Login/Login.js';
 import Register from '../Register/Register.js';
 import HeaderLogged from '../HeaderLogged/HeaderLogged.js';
-
+import Error from '../Error/Error.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -98,10 +98,14 @@ class App extends React.Component {
             loggedIn={this.state.loggedIn}
             component={Profile} />
 
+            <Route path="/">
+              <Error />
+            </Route>
+
         </Switch>
 
         <Switch>
-          
+
           <Route exact path={["/", "/movies", "/saved-movies", "/profile"]}>
             <Footer />
           </Route>
