@@ -13,6 +13,7 @@ import Register from '../Register/Register.js';
 import HeaderLogged from '../HeaderLogged/HeaderLogged.js';
 import Error from '../Error/Error.js';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -98,9 +99,9 @@ class App extends React.Component {
             loggedIn={this.state.loggedIn}
             component={Profile} />
 
-            <Route path="/">
-              <Error />
-            </Route>
+          <Route path="/">
+            <Error />
+          </Route>
 
         </Switch>
 

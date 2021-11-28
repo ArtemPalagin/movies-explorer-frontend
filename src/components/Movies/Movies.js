@@ -1,6 +1,7 @@
 import React from 'react';
 import './Movies.css';
 import MoviesCardList from '../MoviesCardList/MoviesCardList.js';
+import Preloader from '../Preloader/Preloader.js';
 import searchImage from '../../images/search-image.svg';
 class Movies extends React.Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class Movies extends React.Component {
           </div>
         </div>
         <MoviesCardList cards={this.props.cards} />
+        <Preloader />
         <button className="movies__button">Ещё</button>
       </section>
     )
