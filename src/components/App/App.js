@@ -12,108 +12,120 @@ import Login from '../Login/Login.js';
 import Register from '../Register/Register.js';
 import HeaderLogged from '../HeaderLogged/HeaderLogged.js';
 import Error from '../Error/Error.js';
-
+import * as Authentication from '../../utils/Authentication.js';
+import mainApi from "../../utils/MainApi.js"
+import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: [{
-        image: "https://oir.mobi/uploads/posts/2021-05/1622262892_61-oir_mobi-p-krasivie-vidi-prirodi-priroda-krasivo-foto-65.jpg",
-        text: "какая-то гора 1",
-        like: true,
-        time: "1ч42м",
-      }, {
-        image: "https://oir.mobi/uploads/posts/2021-05/1622262892_61-oir_mobi-p-krasivie-vidi-prirodi-priroda-krasivo-foto-65.jpg",
-        text: "какая-то гора 2",
-        like: true,
-        time: "1ч42м",
-      }, {
-        image: "https://oir.mobi/uploads/posts/2021-05/1622262892_61-oir_mobi-p-krasivie-vidi-prirodi-priroda-krasivo-foto-65.jpg",
-        text: "какая-то гора 3",
-        like: true,
-        time: "1ч42м",
-      }, {
-        image: "https://oir.mobi/uploads/posts/2021-05/1622262892_61-oir_mobi-p-krasivie-vidi-prirodi-priroda-krasivo-foto-65.jpg",
-        text: "какая-то гора 4",
-        like: true,
-        time: "1ч42м",
-      }, {
-        image: "https://oir.mobi/uploads/posts/2021-05/1622262892_61-oir_mobi-p-krasivie-vidi-prirodi-priroda-krasivo-foto-65.jpg",
-        text: "какая-то гора 5",
-        like: true,
-        time: "1ч42м",
-      }, {
-        image: "https://oir.mobi/uploads/posts/2021-05/1622262892_61-oir_mobi-p-krasivie-vidi-prirodi-priroda-krasivo-foto-65.jpg",
-        text: "какая-то гора 6",
-        like: true,
-        time: "1ч42м",
-      }],
-      loggedIn: true,
+      cards: [],
+      loggedIn: false,
+      currentUser: {},
     };
+  }
+  componentDidMount() {
+    this.tokenCheck();
+  }
+  tokenCheck = () => {
+    const jwt = localStorage.getItem('token');
+    if (!jwt) {
+      return
+    }
+    this.setState({ loggedIn: true });
+    this.props.history.push("/movies");
+  }
+
+  registrationRequest = (name, email, password) => {
+
+    Authentication.register(name, email, password).then((resp) => {
+      this.loginRequest(resp.data.email, password);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+  loginRequest = (email, password) => {
+
+    Authentication.login(email, password).then((data) => {
+      localStorage.setItem('token', data.token);
+      this.setState({ loggedIn: true });
+      this.props.history.push('/movies');
+    }).catch((err => {
+      console.log(err);
+    }))
+  }
+  profileSubmit = (name, email) => {
+    mainApi.patchUser(name, email).then((user) => {
+      this.setState({ currentUser: { name: user.name, email: user.email}});
+    }).cards((err) => {
+      console.log(err);
+    })
+    
   }
   render() {
     return (
-      <div className="page">
+      <CurrentUserContext.Provider value={this.state.currentUser}>
+        <div className="page">
 
-        <Switch>
+          <Switch>
 
-          <Route exact path="/">
-            <Header />
-          </Route>
+            <Route exact path="/">
+              <Header />
+            </Route>
 
-          <Route exact path={["/movies", "/saved-movies", "/profile"]}>
-            <HeaderLogged />
-          </Route>
+            <Route exact path={["/movies", "/saved-movies", "/profile"]}>
+              <HeaderLogged />
+            </Route>
 
-        </Switch>
+          </Switch>
 
-        <Switch>
+          <Switch>
 
-          <Route exact path="/">
-            <Main />
-          </Route>
+            <Route exact path="/">
+              <Main />
+            </Route>
 
-          <Route exact path="/register">
-            <Register />
-          </Route>
+            <Route exact path="/register">
+              <Register registrationRequest={this.registrationRequest} />
+            </Route>
 
-          <Route exact path="/sign-in">
-            <Login />
-          </Route>
+            <Route exact path="/sign-in">
+              <Login loginRequest={this.loginRequest} />
+            </Route>
 
-          <ProtectedRoute
-            path="/movies"
-            loggedIn={this.state.loggedIn}
-            component={Movies}
-            cards={this.state.cards} />
+            <ProtectedRoute
+              path="/movies"
+              loggedIn={this.state.loggedIn}
+              component={Movies}
+              cards={this.state.cards} />
 
-          <ProtectedRoute
-            path="/saved-movies"
-            loggedIn={this.state.loggedIn}
-            component={SavedMovies}
-            cards={this.state.cards} />
+            <ProtectedRoute
+              path="/saved-movies"
+              loggedIn={this.state.loggedIn}
+              component={SavedMovies}
+              cards={this.state.cards} />
 
-          <ProtectedRoute
-            path="/profile"
-            loggedIn={this.state.loggedIn}
-            component={Profile} />
+            <ProtectedRoute
+              path="/profile"
+              loggedIn={this.state.loggedIn}
+              component={Profile} profileSubmit={this.profileSubmit} />
 
-          <Route path="/">
-            <Error />
-          </Route>
+            <Route path="/">
+              <Error />
+            </Route>
 
-        </Switch>
+          </Switch>
 
-        <Switch>
+          <Switch>
 
-          <Route exact path={["/", "/movies", "/saved-movies", "/profile"]}>
-            <Footer />
-          </Route>
+            <Route exact path={["/", "/movies", "/saved-movies", "/profile"]}>
+              <Footer />
+            </Route>
 
-        </Switch>
-
-      </div>
+          </Switch>
+        </div >
+      </CurrentUserContext.Provider>
     )
   }
 }

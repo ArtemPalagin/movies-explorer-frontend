@@ -1,20 +1,27 @@
 import React from 'react';
-// import likeDeactivates from '../../images/like-deactivates';
 import './MoviesCard.css';
 
 class MoviesCard extends React.Component {
-  constructor(props) {
+  constructor(props){
     super(props);
+    this.state = {
+      liked: this.props.card.liked,
+    }
+  }
+  changeCardLike = () => {
+    this.props.changeLike(this.props.card);
   }
   render() {
     return (
       <section className="movies-card">
-        <img className="movies-card__image" src={this.props.card.image} alt="не получилось загрузить изображение фильма" />
+        <a className="movies-card__link" href={this.props.card.trailerLink}>
+          <img className="movies-card__image" src={`http://api.nomoreparties.co${this.props.card.image.url}`} alt="не получилось загрузить изображение фильма" />
+        </a>
         <div className="movies-card__wrapper">
-          <h3 className="movies-card__title">{this.props.card.text}</h3>
-          <button className={`movies-card__like-button ${(this.props.card.like) ? ("movies-card__like-button_liked") : ("")} `}></button>
+          <h3 className="movies-card__title">{this.props.card.nameRU}</h3>
+          <button onClick={this.changeCardLike} className={`movies-card__like-button ${(this.props.deleteButton) ? ("movies-card__like-button_cross") : (`${this.props.card.liked ? ("movies-card__like-button_liked") : ("")}`)} `}></button>
         </div>
-        <p className="movies-card__time">{this.props.card.time}</p>
+        <p className="movies-card__time">{`${Math.floor(this.props.card.duration / 60) === 0 ? "" : `${Math.floor(this.props.card.duration / 60)}ч`}${this.props.card.duration % 60 === 0 ? "" : `${this.props.card.duration % 60}м`}`}</p>
       </section>
     )
   }

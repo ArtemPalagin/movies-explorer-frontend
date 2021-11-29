@@ -17,9 +17,17 @@
   padding-top: 11px;
   padding-bottom: 9px;
   cursor: pointer;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity 0.2s linear;
 }
 .movies__button:hover{
   color: #A0A0A0;
+}
+.movies__button_inactive{
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.2s, opacity 0.2s linear;
 }
 @media screen and (max-width: 320px){
   .movies{
