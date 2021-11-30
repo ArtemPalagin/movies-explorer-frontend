@@ -33,7 +33,19 @@ class MainApi {
         'authorization': findToken(),
         'Content-Type': this.contentType
       }
-    }).then(handleStatus);
+    }).then(handleStatus).then(list => list.map(item => ({
+      ...item,
+      image: {
+        url: item.url,
+        formats: {
+          thumbnail: {
+            url: item.thumbnail
+          }
+        },
+      },
+      trailerLink: item.trailer,
+      id: item.movieId,
+    })));
   }
   postMovie(country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId) {
     return fetch(`${this._baseUrl}/movies`, {
@@ -48,11 +60,11 @@ class MainApi {
         duration: duration,
         year: year,
         description: description,
-        image: image,
+        image: image, // ensureServer
         trailer: trailer,
         nameRU: nameRU,
         nameEN: nameEN,
-        thumbnail: thumbnail,
+        thumbnail: thumbnail, // + ensureServer
         movieId: movieId,
       })
     }).then(handleStatus)

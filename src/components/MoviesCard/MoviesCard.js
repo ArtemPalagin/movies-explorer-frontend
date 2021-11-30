@@ -1,5 +1,6 @@
 import React from 'react';
 import './MoviesCard.css';
+import ensureServer from "../../utils/ensureServer.js"
 
 class MoviesCard extends React.Component {
   constructor(props){
@@ -15,7 +16,10 @@ class MoviesCard extends React.Component {
     return (
       <section className="movies-card">
         <a className="movies-card__link" href={this.props.card.trailerLink}>
-          <img className="movies-card__image" src={`http://api.nomoreparties.co${this.props.card.image.url}`} alt="не получилось загрузить изображение фильма" />
+          <img 
+            className="movies-card__image" 
+            src={ensureServer(this.props.card.image.url)} 
+            alt="не получилось загрузить изображение фильма" />
         </a>
         <div className="movies-card__wrapper">
           <h3 className="movies-card__title">{this.props.card.nameRU}</h3>

@@ -16,13 +16,11 @@
 .profile__inpute-wrapper{
   display: flex;
   justify-content: space-between;
+  padding-top: 17px;
 }
 .profile__inpute-wrapper:first-of-type{
   padding-bottom: 16px;
   border-bottom: 1px #E8E8E8 solid;
-}
-.profile__inpute-wrapper:last-of-type{
-  padding-top: 17px;
 }
 .profile__placeholder{
   margin: 0;
@@ -33,13 +31,16 @@
   text-align: left;
 }
 .profile__inpute{
+  background-color: transparent;
   font-size: 11px;
   font-style: normal;
   font-weight: 400;
   line-height: 13px;
   outline: none;
   border: none;
-  direction: rtl;
+  direction: unset !important;
+  unicode-bidi: bidi-override !important;
+  text-align: right;
   width: 100%;
 }
 .profile__inpute-username:invalid{
@@ -51,10 +52,13 @@
 .profile__inpute-email{
   margin-bottom: 0;
 }
+.profile__span-wrapper{
+  position: relative;
+}
 .profile__span{
-  display: none;
+  display: block;
   position: absolute;
-  margin-top: 10px;
+  top: -60px;
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
@@ -62,10 +66,10 @@
   text-align: left;
   color: #FF3055;
 }
-.profile__span_active{
-  display: block;
+.profile__span-wrapper:last-of-type .profile__span{
+  top: 5px;
 }
-.profile__editing{
+.profile__button{
   padding: 0;
   font-style: normal;
   font-weight: 400;
@@ -74,6 +78,30 @@
   background-color: white;
   cursor: pointer;
   align-self: center;
+}
+.profile__button:hover{
+  opacity: 0.6;
+}
+.profile__button_invaled{
+  pointer-events: none;
+  color: transparent;
+}
+.profile__button-span-wrapper{
+  position: relative;
+  align-self: center;
+  width: 100%;
+}
+.profile__button-span{
+  display: block;
+  position: absolute;
+  width: 100%;
+  top: -50px;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 12px;
+  text-align: center;
+  color: #FF3055;
 }
 .profile__exit{
   padding: 0;
@@ -98,7 +126,7 @@
   .profile__greeting{
     margin-bottom: 80px;
   }
-  .profile__editing{
+  .profile__button{
     font-size: calc((100vw - 13.7px)/448 + (79px/7));
     line-height: calc((100vw - 13.7px)/448 + (100px/7));
     margin-top: 379px;
@@ -118,7 +146,7 @@
   .profile__greeting{
     margin-bottom: calc((100vw - 13.7px)/28 + (480px/7));
   }
-  .profile__editing{
+  .profile__button{
     font-size: calc((100vw - 13.7px)/448 + (79px/7));
     line-height: calc((100vw - 13.7px)/448 + (100px/7));
     margin-top: calc((100vw - 13.7px)*-169/448 + (3498px/7));
@@ -138,7 +166,7 @@
   .profile__greeting{
     margin-bottom: calc((100vw - 13.7px)*27/512 + (111px/2));
   }
-  .profile__editing{
+  .profile__button{
     font-size: 13px;
     line-height: 16px;
     margin-top: calc((100vw - 13.7px)*5/256 + (195px));
@@ -158,7 +186,7 @@
   .profile__greeting{
     margin-bottom: 123px;
   }
-  .profile__editing{
+  .profile__button{
     font-size: 13px;
     line-height: 16px;
     margin-top: 220px;

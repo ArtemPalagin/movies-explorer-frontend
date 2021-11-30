@@ -8,11 +8,7 @@ import mainApi from '../../utils/MainApi.js';
 import moviesFilter from '../../utils/MoviesFilter.js';
 import createArrayWithLikes from '../../utils/createArrayWithLikes.js';
 import * as loadingController from '../../utils/loadingController.js';
-
-console.log({
-  mainApi,
-  mainApiPost: mainApi.postMovie
-})
+import ensureServer from "../../utils/ensureServer.js"
 
 class Movies extends React.Component {
   constructor(props) {
@@ -83,6 +79,7 @@ class Movies extends React.Component {
 
     moviesApi.getUser().then((movies) => {
       mainApi.getMovies().then((likedMovies) => {
+        debugger
         const filteredMovies = moviesFilter(movies, keyWord, this.state.shortFilms);
         const filteredMoviesWithLikes = createArrayWithLikes(filteredMovies, likedMovies);
         this.setState({ preloaderActive: false });
@@ -154,7 +151,7 @@ class Movies extends React.Component {
         console.log(err);
       })
     } else {
-      mainApi.postMovie(card.country, card.director, card.duration, card.year, card.description, card.image.url, card.trailerLink, card.nameRU, card.nameEN, card.image.formats.thumbnail.url, card.id).then((movie) => {
+      mainApi.postMovie(card.country, card.director, card.duration, card.year, card.description, `http://api.nomoreparties.co${card.image.url}`, card.trailerLink, card.nameRU, card.nameEN, `http://api.nomoreparties.co${card.image.formats.thumbnail.url}`, card.id).then((movie) => {
         const arrayAfterLiked = this.state.moviesArray.map(item => {
           if(card.id === item.id){
             return {

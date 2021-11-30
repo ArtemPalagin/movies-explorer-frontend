@@ -20,9 +20,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      registrationErrorMessage: "",
+      loginErrorMessage: "",
+      profileErrorMessage: "",
       cards: [],
       loggedIn: false,
       currentUser: {},
+      likedMovies: [],
     };
   }
   componentDidMount() {
@@ -30,18 +34,34 @@ class App extends React.Component {
   }
   tokenCheck = () => {
     const jwt = localStorage.getItem('token');
+    const tryParse = (str) => {
+      try {
+        return str && JSON.parse(str)
+      } catch (e) {
+        return null
+      }
+    }
+
     if (!jwt) {
       return
     }
-    this.setState({ loggedIn: true });
+
+    const user = tryParse(localStorage.getItem('user'));
+    if (!user) {
+      this.userRequest()
+    }
+   
+    this.setState({ loggedIn: true, currentUser: user });
     this.props.history.push("/movies");
   }
 
   registrationRequest = (name, email, password) => {
 
     Authentication.register(name, email, password).then((resp) => {
+      this.setState({ registrationErrorMessage: "" });
       this.loginRequest(resp.data.email, password);
     }).catch((err) => {
+      this.setState({ registrationErrorMessage: err.message });
       console.log(err);
     });
   }
@@ -49,19 +69,40 @@ class App extends React.Component {
 
     Authentication.login(email, password).then((data) => {
       localStorage.setItem('token', data.token);
-      this.setState({ loggedIn: true });
+      this.setState({ loggedIn: true, loginErrorMessage: "" });
       this.props.history.push('/movies');
+      this.moviesRequest();
+      this.userRequest();
     }).catch((err => {
+      // debugger
+      this.setState({ loginErrorMessage: err.message });
       console.log(err);
     }))
   }
   profileSubmit = (name, email) => {
     mainApi.patchUser(name, email).then((user) => {
-      this.setState({ currentUser: { name: user.name, email: user.email}});
-    }).cards((err) => {
+      this.setState({ currentUser: user.data, profileErrorMessage: "", });
+      localStorage.setItem('user', user.data);
+    }).catch((err) => {
+      this.setState({ profileErrorMessage: err.message });
       console.log(err);
     })
-    
+
+  }
+  moviesRequest = () => {
+    mainApi.getMovies().then((movies) => {
+      this.setState({ likedMovies: movies.data });
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+  userRequest = () => {
+    mainApi.getUser().then((user) => {
+      this.setState({ currentUser: user.data });
+      localStorage.setItem('user', JSON.stringify(user.data));
+    }).catch((err) => {
+      console.log(err);
+    })
   }
   render() {
     return (
@@ -87,11 +128,11 @@ class App extends React.Component {
             </Route>
 
             <Route exact path="/register">
-              <Register registrationRequest={this.registrationRequest} />
+              <Register registrationRequest={this.registrationRequest} registrationErrorMessage={this.state.registrationErrorMessage} />
             </Route>
 
             <Route exact path="/sign-in">
-              <Login loginRequest={this.loginRequest} />
+              <Login loginRequest={this.loginRequest} loginErrorMessage={this.state.loginErrorMessage} />
             </Route>
 
             <ProtectedRoute
@@ -104,12 +145,12 @@ class App extends React.Component {
               path="/saved-movies"
               loggedIn={this.state.loggedIn}
               component={SavedMovies}
-              cards={this.state.cards} />
+              cards={this.state.cards} likedMovies={this.state.likedMovies} />
 
             <ProtectedRoute
               path="/profile"
               loggedIn={this.state.loggedIn}
-              component={Profile} profileSubmit={this.profileSubmit} />
+              component={Profile} profileSubmit={this.profileSubmit} profileErrorMessage={this.state.profileErrorMessage} />
 
             <Route path="/">
               <Error />

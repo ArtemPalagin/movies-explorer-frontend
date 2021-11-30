@@ -72,10 +72,6 @@
   cursor: pointer;
   text-decoration: none;
 }
-.navigation__movies-link:hover{
-  text-decoration: underline black;
-}
-
 .navigation__saved-movies-link {
   margin: 0%;
   font-size: 18px;
@@ -87,10 +83,6 @@
   cursor: pointer;
   text-decoration: none;
 }
-.navigation__saved-movies-link:hover{
-  text-decoration: underline black;
-}
-
 .navigation__wrapper {
   display: flex;
   position: absolute;
@@ -108,7 +100,7 @@
   cursor: pointer;
   text-decoration: none;
 }
-.navigation__account-link:hover{
+.navigation__link_active{
   text-decoration: underline black;
 }
 

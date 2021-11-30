@@ -17,12 +17,17 @@ class SavedMovies extends React.Component {
     }
   }
 
-  componentDidMount() {
-    mainApi.getMovies().then((movies) => {
-      this.setState({ moviesArray: movies });
-    }).cards((err) => {
-      console.log(err);
-    })
+  // componentDidMount() {
+  //   mainApi.getMovies().then((movies) => {
+  //     debugger
+  //     this.setState({ moviesArray: movies });
+  //   }).cards((err) => {
+  //     debugger
+  //     console.log(err);
+  //   })
+  // }
+  componentDidUpdate(){
+    // this.setState({ moviesArray: this.props.likedMovies});
   }
   reload = () => {
     mainApi.getMovies().then((movies) => {

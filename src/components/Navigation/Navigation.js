@@ -1,20 +1,36 @@
+import React from 'react';
 import './Navigation.css';
 import accountImage from '../../images/header-icon.svg';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-function Navigation(props) {
-  return (
-    <div className={`navigation  ${(props.NavigationClosed) ? ('navigation_closed') : ('')}`}>
-      <div className={`navigation__body ${(props.NavigationClosed) ? ('navigation__body_closed') : ('')}`}>
-        <button className="navigation__button" onClick={props.CloseNavigation}></button>
-        <Link to="/movies" className="navigation__movies-link">Фильмы</Link>
-        <Link to="/saved-movies" className="navigation__saved-movies-link">Сохранённые фильмы</Link>
-        <div className="navigation__wrapper">
-          <Link to="/profile" className="navigation__account-link">Аккаунт</Link>
-          <img className="navigation__account-image" src={accountImage} alt="Не получилось загрузить иконку аккаунта" />
+class Navigation extends React.Component {
+
+  render() {
+    return (
+      <div className={`navigation  ${(this.props.NavigationClosed) ? ('navigation_closed') : ('')}`}>
+        <div className={`navigation__body ${(this.props.NavigationClosed) ? ('navigation__body_closed') : ('')}`}>
+          <button className="navigation__button" onClick={this.props.CloseNavigation}></button>
+          <NavLink
+            to="/movies"
+            activeClassName="navigation__link_active"
+            className="navigation__movies-link"
+            onClick={this.props.CloseNavigation}>Фильмы</NavLink>
+          <NavLink
+            to="/saved-movies"
+            activeClassName="navigation__link_active"
+            className="navigation__saved-movies-link"
+            onClick={this.props.CloseNavigation}>Сохранённые фильмы</NavLink>
+          <div className="navigation__wrapper">
+            <NavLink
+              to="/profile"
+              activeClassName="navigation__link_active"
+              className="navigation__account-link"
+              onClick={this.props.CloseNavigation}>Аккаунт</NavLink>
+            <img className="navigation__account-image" src={accountImage} alt="Не получилось загрузить иконку аккаунта" />
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 export default Navigation;

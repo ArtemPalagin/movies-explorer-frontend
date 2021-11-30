@@ -28,9 +28,7 @@
   margin-right: 20px;
   color: black;
   text-decoration: none;
-}
-.header_logged__movies-link:hover{
-  font-weight: 500;
+  cursor: pointer;
 }
 .header_logged__saved-movies-link{
   margin: 0;
@@ -41,9 +39,7 @@
   margin-right: 50px;
   color: black;
   text-decoration: none;
-}
-.header_logged__saved-movies-link:hover{
-  font-weight: 500;
+  cursor: pointer;
 }
 .header_logged__account-link{
   margin: 0;
@@ -54,8 +50,9 @@
   margin-right: 17px;
   color: black;
   text-decoration: none;
+  cursor: pointer;
 }
-.header_logged__account-link:hover{
+.header_logged__link_active{
   font-weight: 500;
 }
 .header_logged__account-image{

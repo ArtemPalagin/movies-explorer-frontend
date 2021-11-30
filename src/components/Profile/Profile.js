@@ -4,56 +4,90 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import { withRouter } from 'react-router-dom';
 
 class Profile extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
+      nameErr: "Заполните это поле",
+      emailErr: "Заполните это поле",
+      nameIsInvalid: false,
+      emailIsInvalid: false,
       name: "",
       email: "",
     }
   }
   static contextType = CurrentUserContext;
-  componentDidMount(){
-    this.setState({ name: this.context.name, email: this.context.email});
+  componentDidMount() {
+    this.setState({ name: this.context?.name, email: this.context?.email });
   }
-  
+
   exitRequest = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('movies');
+    localStorage.removeItem('user');
     this.props.history.push('/');
   }
-  handleOnChange = (e) => {
+  handleChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
-    })
+      [e.target.name]: e.target.value,
+      [`${e.target.name}IsInvalid`]: !e.target.valid && e.target.validationMessage 
+    });
   }
   handleSubmit = (e) => {
     e.preventDefault()
+
+    if (!this.allowedToSubmit()) {
+      return
+    }
+
     const form = e.target;
     const data = Object.fromEntries(new FormData(form).entries());
     this.props.profileSubmit(data.name, data.email);
   }
+  allowedToSubmit() {
+    const disableButton = this.state.nameIsInvalid || this.state.emailIsInvalid
+    const hasChanges = this.state.email !== this.context.email || this.state.name !== this.context.name
+
+    return !disableButton && hasChanges
+  }
 
   render() {
+    if (!this.context) {
+      return null
+    }
+
+    const okToSubmit = this.allowedToSubmit()
+
+    
     return (
       <section className="profile">
-        <h1 className="profile__greeting">Привет, Артём!</h1>
+        <h1 className="profile__greeting">{`Привет, ${this.context.name}!`}</h1>
         <form className="profile__form" onSubmit={this.handleSubmit}>
           <div className="profile__inpute-wrapper">
             <p className="profile__placeholder">Имя</p>
-            <input 
+            <input
               value={this.state.name}
-              onChange={this.handleOnChange}
-              className="profile__inpute profile__inpute-username" id="username-input" type="text" name="name" minLength="2" maxLength="40" />
+              onChange={this.handleChange}
+              className="profile__inpute profile__inpute-username" id="username-input" type="text" name="name" minLength="2" maxLength="40" required />
           </div>
+          <div className="profile__span-wrapper">{this.state.nameIsInvalid
+            ? <span className="profile__span">{this.state.nameIsInvalid}</span>
+            : null
+          }</div>
           <div className="profile__inpute-wrapper">
             <p className="profile__placeholder">Email</p>
-            <input 
-               value={this.state.email}
-               onChange={this.handleOnChange}
-            className="profile__inpute profile__inpute-email" id="email-input" type="email" name="email" minLength="2" maxLength="200" />
-            <span className="profile__span">что то пошло не так ...</span>
+            <input
+              value={this.state.email}
+              onChange={this.handleChange}
+              className="profile__inpute profile__inpute-email" id="email-input" type="email" name="email" minLength="2" maxLength="100" required />
           </div>
-
-          <button className="profile__editing">Редактировать</button>
+          <div className="profile__span-wrapper">{this.state.emailIsInvalid
+            ? <span className="profile__span">{this.state.emailIsInvalid}</span>
+            : null}</div>
+          <button className={`profile__button ${(!okToSubmit) ? "profile__button_invaled" : ""}`}
+            disabled={!okToSubmit}>Редактировать</button>
+          <div className="profile__button-span-wrapper">
+            {this.props.profileErrorMessage ? <span className="profile__button-span">{this.props.profileErrorMessage}</span> : null}
+          </div>
         </form>
         <button className="profile__exit" onClick={this.exitRequest}>Выйти из аккаунта</button>
       </section>
