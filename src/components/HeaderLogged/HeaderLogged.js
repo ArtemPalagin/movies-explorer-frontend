@@ -10,7 +10,7 @@ class HeaderLogged extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      NavigationClosed: false,
+      NavigationClosed: true,
     }
   }
   CloseNavigation = () => {
