@@ -18,6 +18,12 @@
   border: none;
   outline: none;
 }
+.search-form__button{
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
 .search-form__image{
   width: 34px;
   height: 34px;
