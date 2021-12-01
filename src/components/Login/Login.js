@@ -19,6 +19,9 @@ class Login extends React.Component {
   }
   handleSubmit = (e) => {
     e.preventDefault()
+    if(this.state.emailIsInvalid || this.state.passwordIsInvalid){
+      return
+    }
     const form = e.target;
     const data = Object.fromEntries(new FormData(form).entries());
     this.props.loginRequest(data.email, data.password);

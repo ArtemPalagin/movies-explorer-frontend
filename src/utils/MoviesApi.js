@@ -5,7 +5,7 @@ export class MoviesApi {
     this._baseUrl = options.baseUrl;
     this.contentType = options.contentType;
   }
-  getUser() {
+  getMoviesFromServer() {
     return fetch(`${this._baseUrl}`).then(handleStatus)
   }
 }

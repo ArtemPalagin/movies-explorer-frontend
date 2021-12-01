@@ -13,6 +13,7 @@ class MoviesCard extends React.Component {
     this.props.changeLike(this.props.card);
   }
   render() {
+    // debugger
     return (
       <section className="movies-card">
         <a className="movies-card__link" href={this.props.card.trailerLink}>

@@ -23,7 +23,6 @@ class App extends React.Component {
       registrationErrorMessage: "",
       loginErrorMessage: "",
       profileErrorMessage: "",
-      cards: [],
       loggedIn: false,
       currentUser: {},
       likedMovies: [],
@@ -50,7 +49,10 @@ class App extends React.Component {
     if (!user) {
       this.userRequest()
     }
-   
+    const likedMovies = tryParse(localStorage.getItem('likedMovies'));
+    if(likedMovies){
+      this.setState({ likedMovies: likedMovies})
+    }
     this.setState({ loggedIn: true, currentUser: user });
     this.props.history.push("/movies");
   }
@@ -82,7 +84,7 @@ class App extends React.Component {
   profileSubmit = (name, email) => {
     mainApi.patchUser(name, email).then((user) => {
       this.setState({ currentUser: user.data, profileErrorMessage: "", });
-      localStorage.setItem('user', user.data);
+      localStorage.setItem('user', JSON.stringify(user.data));
     }).catch((err) => {
       this.setState({ profileErrorMessage: err.message });
       console.log(err);
@@ -91,10 +93,26 @@ class App extends React.Component {
   }
   moviesRequest = () => {
     mainApi.getMovies().then((movies) => {
-      this.setState({ likedMovies: movies.data });
+      this.setState({ likedMovies: movies });
+      localStorage.setItem('likedMovies', JSON.stringify(movies));
     }).catch((err) => {
       console.log(err);
     })
+  }
+  likedMoviesAdd = (movie) => {
+    const newLikedArray = [...this.state.likedMovies, movie]
+    this.setState({ likedMovies: newLikedArray });
+    localStorage.setItem('likedMovies', JSON.stringify(newLikedArray));
+  }
+  likedMoviesRemove = (movie) => {
+    const newLikedArray = this.state.likedMovies.filter((elem) => {
+      if(elem.id === movie.id){
+        return false
+      }
+      return true
+    })
+    this.setState({ likedMovies: newLikedArray });
+    localStorage.setItem('likedMovies', JSON.stringify(newLikedArray));
   }
   userRequest = () => {
     mainApi.getUser().then((user) => {
@@ -138,14 +156,12 @@ class App extends React.Component {
             <ProtectedRoute
               path="/movies"
               loggedIn={this.state.loggedIn}
-              component={Movies}
-              cards={this.state.cards} />
+              component={Movies} likedMovies={this.state.likedMovies} likedMoviesAdd={this.likedMoviesAdd} likedMoviesRemove={this.likedMoviesRemove} />
 
             <ProtectedRoute
               path="/saved-movies"
               loggedIn={this.state.loggedIn}
-              component={SavedMovies}
-              cards={this.state.cards} likedMovies={this.state.likedMovies} />
+              component={SavedMovies} likedMovies={this.state.likedMovies} likedMoviesRemove={this.likedMoviesRemove} />
 
             <ProtectedRoute
               path="/profile"

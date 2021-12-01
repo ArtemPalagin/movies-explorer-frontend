@@ -1,13 +1,12 @@
+const isLiked = (list, id) => {
+  return list.some(item => item.id === id)
+}
+
 const createArrayWithLikes = (array, likedArray) => {
   let arrayWithLikes = array;
   for(let i = 0; i < arrayWithLikes.length; i++){
-    for(let j = 0; j < likedArray.length; j++){
-      if(arrayWithLikes[i].id === likedArray.id[j]){
-        arrayWithLikes[i].liked = true;
-      } else {
-        arrayWithLikes[i].liked = true;
-      }
-    }
+
+    arrayWithLikes[i].liked = isLiked(likedArray,  arrayWithLikes[i].id);
   }
   return arrayWithLikes;
 }

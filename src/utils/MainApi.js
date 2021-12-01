@@ -1,4 +1,6 @@
 import { handleStatus, findToken } from "./utils.js";
+import ensureServer from "../utils/ensureServer.js";
+import changeFormat from "./changeFormat.js";
 
 class MainApi {
   constructor(options) {
@@ -33,19 +35,10 @@ class MainApi {
         'authorization': findToken(),
         'Content-Type': this.contentType
       }
-    }).then(handleStatus).then(list => list.map(item => ({
-      ...item,
-      image: {
-        url: item.url,
-        formats: {
-          thumbnail: {
-            url: item.thumbnail
-          }
-        },
-      },
-      trailerLink: item.trailer,
-      id: item.movieId,
-    })));
+    }).then(handleStatus).then(resp => {
+      // debugger
+      return resp.data.map(item => changeFormat(item))
+    })
   }
   postMovie(country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId) {
     return fetch(`${this._baseUrl}/movies`, {
@@ -60,14 +53,17 @@ class MainApi {
         duration: duration,
         year: year,
         description: description,
-        image: image, // ensureServer
+        image: ensureServer(image),
         trailer: trailer,
         nameRU: nameRU,
         nameEN: nameEN,
-        thumbnail: thumbnail, // + ensureServer
+        thumbnail: ensureServer(thumbnail),
         movieId: movieId,
       })
-    }).then(handleStatus)
+    }).then(handleStatus).then(resp => {
+      // debugger
+      return resp.data.map(item => changeFormat(item))
+    })
   }
   deleteMovie(movieId) {
     return fetch(`${this._baseUrl}/movies/${movieId}`, {
@@ -76,7 +72,10 @@ class MainApi {
         'authorization': findToken(),
         'Content-Type': this.contentType
       }
-    }).then(handleStatus)
+    }).then(handleStatus).then(resp => {
+      // debugger
+      return resp.data.map(item => changeFormat(item))
+    })
   }
 
 }

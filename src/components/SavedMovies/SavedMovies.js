@@ -16,26 +16,13 @@ class SavedMovies extends React.Component {
       cards: [],
     }
   }
+  static getDerivedStateFromProps(props, state) {
+    return { moviesArray: props.likedMovies }
+  }
+  componentDidMount() {
+    this.setState({ cards: this.props.likedMovies, moviesArray: this.props.likedMovies });
+  }
 
-  // componentDidMount() {
-  //   mainApi.getMovies().then((movies) => {
-  //     debugger
-  //     this.setState({ moviesArray: movies });
-  //   }).cards((err) => {
-  //     debugger
-  //     console.log(err);
-  //   })
-  // }
-  componentDidUpdate(){
-    // this.setState({ moviesArray: this.props.likedMovies});
-  }
-  reload = () => {
-    mainApi.getMovies().then((movies) => {
-      this.setState({ moviesArray: movies });
-    }).cards((err) => {
-      console.log(err);
-    })
-  }
   downloadMovies = (keyWord) => {
 
     const filteredMovies = moviesFilter(this.state.moviesArray, keyWord, this.state.shortFilms);
@@ -52,14 +39,7 @@ class SavedMovies extends React.Component {
     this.setState({ shortFilms: !this.state.shortFilms })
   }
   deleteMovie = (card) => {
-    mainApi.deleteMovie(card).then(() => {
-      const arrayAfterDeletion = this.state.moviesArray.filter((elem) => {
-        if (elem.id === card.id) {
-          return false;
-        } else {
-          return true;
-        }
-      })
+    mainApi.deleteMovie(card.id).then((movie) => {
       const cardsAfterDeletion = this.state.cards.filter((elem) => {
         if (elem.id === card.id) {
           return false;
@@ -67,7 +47,22 @@ class SavedMovies extends React.Component {
           return true;
         }
       })
-      this.setState({ moviesArray: arrayAfterDeletion, cards: cardsAfterDeletion });
+      const movieData = movie;
+      debugger
+      this.props.likedMoviesRemove({
+        ...movieData,
+        image: {
+          url: movieData.image,
+          formats: {
+            thumbnail: {
+              url: movieData.thumbnail
+            }
+          },
+        },
+        trailerLink: movieData.trailer,
+        id: movieData.movieId,
+      });
+      this.setState({ cards: cardsAfterDeletion });
     }).catch((err) => {
       console.log(err);
     })

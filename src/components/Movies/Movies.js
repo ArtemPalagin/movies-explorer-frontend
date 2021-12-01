@@ -63,25 +63,25 @@ class Movies extends React.Component {
     }
 
     const movies = tryParse(localStorage.getItem('movies'))
-
+    const allMovies = tryParse(localStorage.getItem('allMovies'))
     if (movies) {
-      this.setState({ cards: movies.filteredArray, numberOfCards: movies.moviesNumber });
-    }
-    if (this.state.moviesArray.length === this.state.numberOfCards) {
-      this.setState({ buttonActive: false });
-    } else {
-      this.setState({ buttonActive: true });
+      this.setState({ cards: movies.filteredArray, numberOfCards: movies.moviesNumber, moviesArray: allMovies });
+      if (allMovies.length === movies.moviesNumber) {
+        this.setState({ buttonActive: false });
+      } else {
+        this.setState({ buttonActive: true });
+      }
     }
   }
   downloadMovies = (keyWord) => {
 
     this.setState({ preloaderActive: true, cards: [], numberOfCards: 0, message: "" });
 
-    moviesApi.getUser().then((movies) => {
-      mainApi.getMovies().then((likedMovies) => {
-        debugger
+    moviesApi.getMoviesFromServer().then((movies) => {
+        
         const filteredMovies = moviesFilter(movies, keyWord, this.state.shortFilms);
-        const filteredMoviesWithLikes = createArrayWithLikes(filteredMovies, likedMovies);
+        
+        const filteredMoviesWithLikes = createArrayWithLikes(filteredMovies, this.props.likedMovies);
         this.setState({ preloaderActive: false });
         if (!filteredMoviesWithLikes.length) {
           this.setState({ message: "Ничего не найдено" });
@@ -96,10 +96,7 @@ class Movies extends React.Component {
           this.setState({ buttonActive: true });
         }
         localStorage.setItem('movies', JSON.stringify(numberOfFilteredMovies));
-      }).catch((err) => {
-        this.setState({ preloaderActive: false });
-        console.log(err);
-      })
+        localStorage.setItem('allMovies', JSON.stringify(filteredMoviesWithLikes));
     }).catch((err) => {
 
       this.setState({ preloader: false, message: "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз" });
@@ -129,6 +126,7 @@ class Movies extends React.Component {
     } else {
       this.setState({ buttonActive: true });
     }
+    localStorage.setItem('movies', JSON.stringify(numberOfFilteredMovies));
   }
   changeShortFilms = () => {
     this.setState({ shortFilms: !this.state.shortFilms })
@@ -136,9 +134,11 @@ class Movies extends React.Component {
   changeLike = (card) => {
 
     if (card.liked) {
-      mainApi.deleteMovie(card.id).then(() => {
-        const arrayAfterdisliked = this.state.moviesArray.map(item => {
-          if(card.id === item.id){
+      // debugger
+      mainApi.deleteMovie(card.id).then((movie) => {
+        const arrayAfterdisliked = this.state.cards.map(item => {
+          if (card.id === item.id) {
+
             return {
               ...item,
               liked: false
@@ -146,14 +146,16 @@ class Movies extends React.Component {
           }
           return item;
         })
-        this.setState({ moviesArray: arrayAfterdisliked});
+        this.props.likedMoviesRemove(movie);
+        localStorage.setItem('movies', JSON.stringify({filteredArray: arrayAfterdisliked, moviesNumber: arrayAfterdisliked.length}));
+        this.setState({ cards: arrayAfterdisliked });
       }).catch((err) => {
         console.log(err);
       })
     } else {
       mainApi.postMovie(card.country, card.director, card.duration, card.year, card.description, `http://api.nomoreparties.co${card.image.url}`, card.trailerLink, card.nameRU, card.nameEN, `http://api.nomoreparties.co${card.image.formats.thumbnail.url}`, card.id).then((movie) => {
-        const arrayAfterLiked = this.state.moviesArray.map(item => {
-          if(card.id === item.id){
+        const arrayAfterLiked = this.state.cards.map(item => {
+          if (card.id === item.id) {
             return {
               ...item,
               liked: true
@@ -161,7 +163,10 @@ class Movies extends React.Component {
           }
           return item;
         })
-        this.setState({ moviesArray: arrayAfterLiked});
+        // debugger
+        this.props.likedMoviesAdd(movie);
+        localStorage.setItem('movies', JSON.stringify({filteredArray: arrayAfterLiked, moviesNumber: arrayAfterLiked.length}));
+        this.setState({ cards: arrayAfterLiked });
       }).catch((err) => {
         console.log(err);
       })
