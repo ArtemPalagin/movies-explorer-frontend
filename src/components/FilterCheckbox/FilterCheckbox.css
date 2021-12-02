@@ -33,7 +33,7 @@
   box-shadow: inset 0 0 5px rgba(0,0,0,.2);
   cursor: pointer;
 }
-.filter-checkbox__switch-checkbox:checked{
+.filter-checkbox__switch-checkbox_active{
   background: #2BE080;
 }
 .filter-checkbox__switch-checkbox::before{
@@ -49,7 +49,7 @@
   transform: scale(1.1); 
   box-shadow: 0 2px 5px rgba(0,0,0,.2); 
 }
-.filter-checkbox__switch-checkbox:checked::before{
+.filter-checkbox__switch-checkbox_active::before{
   left: 19px;
 }
 @media screen and (max-width: 320px){

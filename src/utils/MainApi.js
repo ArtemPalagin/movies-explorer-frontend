@@ -37,7 +37,7 @@ class MainApi {
       }
     }).then(handleStatus).then(resp => {
       // debugger
-      return resp.data.map(item => changeFormat(item))
+      return resp.data.map(changeFormat)
     })
   }
   postMovie(country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId) {
@@ -62,7 +62,7 @@ class MainApi {
       })
     }).then(handleStatus).then(resp => {
       // debugger
-      return resp.data.map(item => changeFormat(item))
+      return changeFormat(resp.data)
     })
   }
   deleteMovie(movieId) {
@@ -74,7 +74,7 @@ class MainApi {
       }
     }).then(handleStatus).then(resp => {
       // debugger
-      return resp.data.map(item => changeFormat(item))
+      return changeFormat(resp)
     })
   }
 

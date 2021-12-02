@@ -39,7 +39,41 @@ class SavedMovies extends React.Component {
     this.setState({ shortFilms: !this.state.shortFilms })
   }
   deleteMovie = (card) => {
-    mainApi.deleteMovie(card.id).then((movie) => {
+    mainApi.deleteMovie(card.id).then(() => {
+      const tryParse = (str) => {
+        try {
+          return str && JSON.parse(str)
+        } catch (e) {
+          return null
+        }
+      }
+      const movies = tryParse(localStorage.getItem('movies'))
+      const allMovies = tryParse(localStorage.getItem('allMovies'))
+      // debugger
+      if (movies) {
+        const cardsAfterdisliked = movies.filteredArray.map(item => {
+          if (card.id === item.id) {
+
+            return {
+              ...item,
+              liked: false
+            }
+          }
+          return item;
+        })
+        const arrayAfterdisliked = allMovies.map(item => {
+          if (card.id === item.id) {
+            return {
+              ...item,
+              liked: false
+            }
+          }
+          return item;
+        })
+        localStorage.setItem('movies', JSON.stringify({ filteredArray: cardsAfterdisliked, moviesNumber: cardsAfterdisliked.length }));
+        localStorage.setItem('allMovies', JSON.stringify(arrayAfterdisliked));
+      }
+
       const cardsAfterDeletion = this.state.cards.filter((elem) => {
         if (elem.id === card.id) {
           return false;
@@ -47,22 +81,11 @@ class SavedMovies extends React.Component {
           return true;
         }
       })
-      const movieData = movie;
       debugger
-      this.props.likedMoviesRemove({
-        ...movieData,
-        image: {
-          url: movieData.image,
-          formats: {
-            thumbnail: {
-              url: movieData.thumbnail
-            }
-          },
-        },
-        trailerLink: movieData.trailer,
-        id: movieData.movieId,
-      });
+      this.props.likedMoviesRemove(card);
       this.setState({ cards: cardsAfterDeletion });
+      localStorage.setItem('likedMovies', JSON.stringify(cardsAfterDeletion));
+
     }).catch((err) => {
       console.log(err);
     })
@@ -70,7 +93,7 @@ class SavedMovies extends React.Component {
   render() {
     return (
       <section className="saved-movies movies">
-        <SearchForm downloadMovies={this.downloadMovies} changeShortFilms={this.changeShortFilms} />
+        <SearchForm downloadMovies={this.downloadMovies} changeShortFilms={this.changeShortFilms} shortFilms={this.state.shortFilms} />
         <MoviesCardList cards={this.state.cards} changeLike={this.deleteMovie} deleteButton={true} />
         <Preloader preloaderActive={false} message={this.state.message} />
       </section>

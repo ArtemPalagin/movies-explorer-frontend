@@ -26,6 +26,7 @@ class Profile extends React.Component {
     localStorage.removeItem('user');
     localStorage.removeItem('allMovies');
     localStorage.removeItem('likedMovies');
+    localStorage.removeItem('shortFilms');
     this.props.history.push('/');
   }
   handleChange = (e) => {
@@ -69,7 +70,7 @@ class Profile extends React.Component {
             <input
               value={this.state.name}
               onChange={this.handleChange}
-              className="profile__inpute profile__inpute-username" id="username-input" type="text" name="name" minLength="2" maxLength="40" required />
+              className="profile__inpute profile__inpute-username" id="username-input" type="text"  pattern="[A-Za-zА-Яа-яЁё\s\-]+" name="name" minLength="2" maxLength="40" required />
           </div>
           <div className="profile__span-wrapper">{this.state.nameIsInvalid
             ? <span className="profile__span">{this.state.nameIsInvalid}</span>
@@ -83,7 +84,7 @@ class Profile extends React.Component {
               className="profile__inpute profile__inpute-email" id="email-input" type="email" name="email" minLength="2" maxLength="100" required />
           </div>
           <div className="profile__span-wrapper">{this.state.emailIsInvalid
-            ? <span className="profile__span">{this.state.emailIsInvalid}</span>
+            ? <span className="profile__span profile__span_last">{this.state.emailIsInvalid}</span>
             : null}</div>
           <button className={`profile__button ${(!okToSubmit) ? "profile__button_invaled" : ""}`}
             disabled={!okToSubmit}>Редактировать</button>

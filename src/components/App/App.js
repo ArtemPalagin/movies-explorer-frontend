@@ -30,6 +30,7 @@ class App extends React.Component {
   }
   componentDidMount() {
     this.tokenCheck();
+    this.setState({ registrationErrorMessage: "", loginErrorMessage: "", profileErrorMessage: "" })
   }
   tokenCheck = () => {
     const jwt = localStorage.getItem('token');
@@ -63,7 +64,11 @@ class App extends React.Component {
       this.setState({ registrationErrorMessage: "" });
       this.loginRequest(resp.data.email, password);
     }).catch((err) => {
-      this.setState({ registrationErrorMessage: err.message });
+      if(err.message){
+        this.setState({ registrationErrorMessage: err.message });
+      } else {
+        this.setState({ registrationErrorMessage: "что то пошло не так..." });
+      }
       console.log(err);
     });
   }
@@ -76,8 +81,12 @@ class App extends React.Component {
       this.moviesRequest();
       this.userRequest();
     }).catch((err => {
-      // debugger
-      this.setState({ loginErrorMessage: err.message });
+      
+      if(err.message){
+        this.setState({ loginErrorMessage: err.message });
+      } else {
+        this.setState({ loginErrorMessage: "что то пошло не так..." });
+      }
       console.log(err);
     }))
   }
@@ -86,7 +95,11 @@ class App extends React.Component {
       this.setState({ currentUser: user.data, profileErrorMessage: "", });
       localStorage.setItem('user', JSON.stringify(user.data));
     }).catch((err) => {
-      this.setState({ profileErrorMessage: err.message });
+      if(err.message){
+        this.setState({ profileErrorMessage: err.message });
+      } else {
+        this.setState({ profileErrorMessage: "что то пошло не так..." });
+      }
       console.log(err);
     })
 

@@ -68,7 +68,7 @@
   text-align: left;
   color: #FF3055;
 }
-.register__span-wrapper:last-of-type .register__span{
+.register__span_last{
   top: 0;
 }
 .register__button{

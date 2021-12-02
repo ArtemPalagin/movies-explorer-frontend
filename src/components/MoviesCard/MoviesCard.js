@@ -16,7 +16,7 @@ class MoviesCard extends React.Component {
     // debugger
     return (
       <section className="movies-card">
-        <a className="movies-card__link" href={this.props.card.trailerLink}>
+        <a className="movies-card__link" href={this.props.card.trailerLink} target="_blank" rel="noreferrer">
           <img 
             className="movies-card__image" 
             src={ensureServer(this.props.card.image.url)} 

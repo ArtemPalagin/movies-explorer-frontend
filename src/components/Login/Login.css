@@ -67,7 +67,7 @@
   text-align: left;
   color: #FF3055;
 }
-.login__span-wrapper:last-of-type .login__span{
+.login__span_last{
   top: 0;
 }
 .login__button{

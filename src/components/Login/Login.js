@@ -14,6 +14,9 @@ class Login extends React.Component {
       passwordIsInvalid: true,
     }
   }
+  // static getDerivedStateFromProps(props, state) {
+  //   return { emailIsInvalid: true, passwordIsInvalid: true }
+  // }
   handleChange = (e) => {
     this.setState({ [`${e.target.name}IsInvalid`]: !e.target.valid && e.target.validationMessage });
   }
@@ -27,8 +30,8 @@ class Login extends React.Component {
     this.props.loginRequest(data.email, data.password);
 
     e.target.reset();
+    this.setState({ emailIsInvalid: true, passwordIsInvalid: true })
   }
-
   render() {
     const disableButton = this.state.emailIsInvalid || this.state.passwordIsInvalid
     return (
@@ -42,9 +45,9 @@ class Login extends React.Component {
             ? <span className="login__span">{this.state.emailIsInvalid}</span>
             : null}</div>
           <p className="login__placeholder">Пароль</p>
-          <input className="login__inpute login__inpute-password" onChange={this.handleChange} id="password-input" type="password" name="password" minLength="5" maxLength="40" required />
+          <input className="login__inpute login__inpute-password" onChange={this.handleChange} id="password-input" type="password" name="password" minLength="8" maxLength="40" required />
           <div className="login__span-wrapper">{this.state.passwordIsInvalid
-            ? <span className="login__span">{this.state.passwordIsInvalid}</span>
+            ? <span className="login__span login__span_last">{this.state.passwordIsInvalid}</span>
             : null}</div>
           <button className={`login__button ${disableButton ? "login__button_invaled" : ""}`}
             disabled={disableButton}>Войти</button>

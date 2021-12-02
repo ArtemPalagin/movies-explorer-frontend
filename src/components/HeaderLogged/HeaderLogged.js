@@ -22,7 +22,6 @@ class HeaderLogged extends React.Component {
         <Navigation
           NavigationClosed={this.state.NavigationClosed}
           CloseNavigation={this.CloseNavigation} />
-
         <img className="header_logged__logo" src={loggedLogo} alt="Не получислось загрузить картинку логотипа" />
         <img className="header_logged__navigation-button" src={headerNavigationButtom} onClick={this.CloseNavigation} alt="Не получилось загрузть иконку для навигации" />
         <div className="header_logged__links-wrapper" >

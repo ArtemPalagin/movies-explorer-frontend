@@ -7,16 +7,16 @@ export const register = (name, email, password) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({name, email, password})
+    body: JSON.stringify({ name, email, password })
   })
-  .then((response) => {
-    if (response.ok){
-      return response.json();
-    } else {
-      throw new Error()
-    }
-  });
-}; 
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return response.json().then(resp => { throw resp })
+      }
+    });
+};
 
 export const login = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
@@ -25,13 +25,13 @@ export const login = (email, password) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({email, password})
+    body: JSON.stringify({ email, password })
   })
-  .then((response) => {
-    if (response.ok){
-      return response.json();
-    } else {
-      throw new Error()
-    }
-  });
-}; 
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return response.json().then(resp => { throw resp })
+      }
+    });
+};

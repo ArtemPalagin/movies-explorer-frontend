@@ -16,6 +16,9 @@ class Register extends React.Component {
       passwordIsInvalid: true,
     }
   }
+  componentDidMount(){
+    this.setState({ nameIsInvalid: true, emailIsInvalid: true, passwordIsInvalid: true})
+  }
   handleChange = (e) => {
     this.setState({ [`${e.target.name}IsInvalid`]: !e.target.valid && e.target.validationMessage });
   }
@@ -28,6 +31,7 @@ class Register extends React.Component {
     const data = Object.fromEntries(new FormData(form).entries());
     this.props.registrationRequest(data.name, data.email, data.password);
     e.target.reset();
+    this.setState({ nameIsInvalid: true, emailIsInvalid: true, passwordIsInvalid: true })
   }
   render() {
     const disableButton = this.state.nameIsInvalid || this.state.emailIsInvalid || this.state.passwordIsInvalid
@@ -37,7 +41,7 @@ class Register extends React.Component {
         <h1 className="register__greeting">Добро пожаловать!</h1>
         <form className="register__form" onSubmit={this.handleSubmit} noValidate>
           <p className="register__placeholder">Имя</p>
-          <input className="register__inpute register__inpute-username" onChange={this.handleChange} id="username-input" type="text" name="name" minLength="2" maxLength="40" required />
+          <input className="register__inpute register__inpute-username" onChange={this.handleChange} id="username-input" pattern="[A-Za-zА-Яа-яЁё\s\-]+" type="text" name="name" minLength="2" maxLength="40" required />
           <div className="register__span-wrapper">{this.state.nameIsInvalid
             ? <span className="register__span">{this.state.nameIsInvalid}</span>
             : null
@@ -50,7 +54,7 @@ class Register extends React.Component {
           <p className="register__placeholder">Пароль</p>
           <input className="register__inpute register__inpute-password" onChange={this.handleChange} id="password-input" type="password" name="password" minLength="8" maxLength="40" required />
           <div className="register__span-wrapper">{this.state.passwordIsInvalid
-            ? <span className="register__span">{this.state.passwordIsInvalid}</span>
+            ? <span className="register__span register__span_last">{this.state.passwordIsInvalid}</span>
             : null}</div>
           <button className={`register__button ${disableButton ? "register__button_invaled" : ""}`}
             disabled={disableButton}>Зарегистрироваться</button>

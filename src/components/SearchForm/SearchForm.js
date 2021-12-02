@@ -15,12 +15,9 @@ class SearchForm extends React.Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    // this.setState({ text: "" });
-//    e.target.reset();
     this.props.downloadMovies(this.state.text);
-    // console.log(MoviesFilter(this.props.cards ,this.state.text));
-    // localStorage.setItem('token', data.token);
   }
+  
   render() {
     return (
       <div className="search-form" >
@@ -30,7 +27,7 @@ class SearchForm extends React.Component {
             <img className="search-form__image" src={searchImage} alt="Не получилось загрузить иконку поиска" />
           </button>
         </form>
-        <FilterCheckbox changeShortFilms={this.props.changeShortFilms} />
+        <FilterCheckbox changeShortFilms={this.props.changeShortFilms} shortFilms={this.props.shortFilms} />
       </div>
     )
   }

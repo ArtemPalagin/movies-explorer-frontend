@@ -66,9 +66,11 @@
   text-align: left;
   color: #FF3055;
 }
-.profile__span-wrapper:last-of-type .profile__span{
+
+.profile__span_last{
   top: 5px;
 }
+
 .profile__button{
   padding: 0;
   font-style: normal;
