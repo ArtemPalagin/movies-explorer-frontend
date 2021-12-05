@@ -3,6 +3,6 @@ const ensureServer = (img) => {
     return img
   }
 
-  return `http://api.nomoreparties.co${img}`
+  return `https://api.nomoreparties.co${img}`
 }
 export default ensureServer;

@@ -165,7 +165,7 @@ class Movies extends React.Component {
         console.log(err);
       })
     } else {
-      mainApi.postMovie(card.country, card.director, card.duration, card.year, card.description, `http://api.nomoreparties.co${card.image.url}`, card.trailerLink, card.nameRU, card.nameEN, `http://api.nomoreparties.co${card.image.formats.thumbnail.url}`, card.id).then((movie) => {
+      mainApi.postMovie(card.country, card.director, card.duration, card.year, card.description, `https://api.nomoreparties.co${card.image.url}`, card.trailerLink, card.nameRU, card.nameEN, `https://api.nomoreparties.co${card.image.formats.thumbnail.url}`, card.id).then((movie) => {
         const cardsAfterLiked = this.state.cards.map(item => {
           if (card.id === item.id) {
             return {
