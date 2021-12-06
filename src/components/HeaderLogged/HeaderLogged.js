@@ -1,6 +1,6 @@
 import React from 'react';
 import './HeaderLogged.css';
-import loggedLogo from '../../images/register-image.svg';
+import loggedLogo from '../../images/logo.svg';
 import headerIcon from '../../images/header-icon.svg';
 import headerNavigationButtom from '../../images/header-navigation-buttom.svg';
 import { NavLink } from 'react-router-dom';

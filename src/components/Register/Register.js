@@ -1,5 +1,5 @@
 import React from 'react';
-import registerImage from '../../images/register-image.svg';
+import registerImage from '../../images/logo.svg';
 import './Register.css';
 import { Link } from 'react-router-dom';
 

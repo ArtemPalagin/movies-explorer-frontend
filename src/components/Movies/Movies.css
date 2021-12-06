@@ -1,6 +1,7 @@
 .movies{
   display: flex;
   flex-direction: column;
+  background-color: transparent;
 }
 .movies__button{
   border: none;

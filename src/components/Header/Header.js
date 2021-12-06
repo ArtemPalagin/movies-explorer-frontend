@@ -1,5 +1,5 @@
 import './Header.css';
-import topTabLogo from '../../images/top-tab-logo.svg';
+import topTabLogo from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
 
 

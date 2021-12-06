@@ -9,6 +9,7 @@
   border-bottom: 8px #09506e solid;
   border-radius: 50px;
   animation: spin 1s linear infinite;
+  background-color: transparent;
 }
 @keyframes spin{
   from { transform: rotate(0deg); }

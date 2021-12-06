@@ -24,7 +24,7 @@ class SearchForm extends React.Component {
         <form className="search-form__wrapper" onSubmit={this.handleSubmit}>
           <input className="search-form__inpute" onChange={this.textChange} placeholder="Фильм" type="text" name="search" />
           <button className="search-form__button">
-            <img className="search-form__image" src={searchImage} alt="Не получилось загрузить иконку поиска" />
+            <p className="search-form__image" src={searchImage} alt="Не получилось загрузить иконку поиска">Поиск</p>
           </button>
         </form>
         <FilterCheckbox changeShortFilms={this.props.changeShortFilms} shortFilms={this.props.shortFilms} />

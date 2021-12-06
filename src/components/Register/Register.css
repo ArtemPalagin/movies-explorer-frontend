@@ -1,6 +1,7 @@
 .register{
   display: flex;
   flex-direction: column;
+  background-color: transparent;
 }
 .register__image{
   width: 38px;
@@ -43,13 +44,13 @@
   outline: none;
 }
 .register__inpute-username:invalid{
-  color: #FF3055;
+  color: #EE3465;
 }
 .register__inpute-email:invalid{
-  color: #FF3055;
+  color: #EE3465;
 }
 .register__inpute-password:invalid{
-  color: #FF3055;
+  color: #EE3465;
 }
 .register__inpute-password{
   margin-bottom: 0;
@@ -66,7 +67,7 @@
   font-weight: 400;
   line-height: 12px;
   text-align: left;
-  color: #FF3055;
+  color: #EE3465;
 }
 .register__span_last{
   top: 0;
@@ -102,7 +103,7 @@
   font-weight: 400;
   line-height: 12px;
   text-align: center;
-  color: #FF3055;
+  color: #EE3465;
 }
 .register__link-wrapper{
   display: flex;

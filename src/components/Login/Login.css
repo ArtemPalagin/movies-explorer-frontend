@@ -1,6 +1,7 @@
 .login{
   display: flex;
   flex-direction: column;
+  background-color: transparent;
 }
 .login__image{
   width: 38px;
