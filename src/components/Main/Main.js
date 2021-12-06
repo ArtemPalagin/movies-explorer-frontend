@@ -9,7 +9,7 @@ function Main(props) {
   return(
     <main className="main">
           <Promo />
-          <NavTab />
+          {/* <NavTab /> */}
           <AboutProject />
           <Techs />
           <AboutMe />

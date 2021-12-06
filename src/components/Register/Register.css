@@ -21,7 +21,7 @@
 .register__placeholder{
   margin: 0;
   margin-bottom: 10px;
-  color: #A0A0A0;
+  color: #8B8B8B;
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
@@ -37,7 +37,8 @@
   padding-left: 15px;
   padding-top: 15px;
   padding-bottom: 15px;
-  background-color: #F9F9F9;
+  background-color: #2F2F2F;
+  color: white;
   margin-bottom: 26px;
   border-radius: 8px;
   border: none;
@@ -85,8 +86,8 @@
 }
 .register__button_invaled{
   pointer-events: none;
-  background-color: white;
-  color: black;
+  background-color: transparent;
+  color: white;
 }
 .register__button-span-wrapper{
   position: relative;
@@ -114,7 +115,7 @@
   font-style: normal;
   font-weight: 400;
   text-align: center;
-  columns: #A0A0A0;
+  columns: #8B8B8B;
 }
 .register__link{
   margin: 0;

@@ -9,8 +9,8 @@
   font-style: normal;
   font-weight: 400;
   text-align: center;
-  color: #A0A0A0;
-  border-bottom: 1px #E8E8E8 solid;
+  color: #8B8B8B;
+  border-bottom: 1px #424242 solid;
 }
 
 .footer__wrapper {
@@ -21,14 +21,14 @@
   font-style: normal;
   font-weight: 400;
   text-align: left;
-  color: #A0A0A0;
+  color: #8B8B8B;
 }
 .footer__links-wrapper{
   display: flex;
   justify-content: space-between;
 }
 .footer__link{
-  color: black;
+  color: white;
   text-decoration: none;
   cursor: pointer;
 }
@@ -52,7 +52,6 @@
     justify-content: flex-end;
   }
   .footer__year{
-    color: #A0A0A0;
     font-size: calc((100vw - 13.7px)/448 + (79px/7));
     line-height: calc((100vw - 13.7px)/448 + (100px/7));
     margin-bottom: 10px;
@@ -127,6 +126,7 @@
   .footer__year{
     font-size: 13px;
     line-height: 16px;
+    color: white;
   }
   .footer__links-wrapper{
     font-size: 13px;
@@ -159,6 +159,7 @@
   .footer__year{
     font-size: 13px;
     line-height: 16px;
+    color: white;
   }
   .footer__links-wrapper{
     font-size: 13px;

@@ -14,9 +14,6 @@ class Login extends React.Component {
       passwordIsInvalid: true,
     }
   }
-  // static getDerivedStateFromProps(props, state) {
-  //   return { emailIsInvalid: true, passwordIsInvalid: true }
-  // }
   handleChange = (e) => {
     this.setState({ [`${e.target.name}IsInvalid`]: !e.target.valid && e.target.validationMessage });
   }

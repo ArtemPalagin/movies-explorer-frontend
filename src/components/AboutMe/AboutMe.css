@@ -1,12 +1,12 @@
 .about-me{
-  background-color: white;
+  background-color: transparent;
   display: flex;
   flex-direction: column;
 }
 .about-me__heading{
   margin: 0;
   width: auto;
-  border-bottom: black 1px solid;
+  border-bottom: #DADADA 1px solid;
   font-style: normal;
   font-weight: 400;
   text-align: left;
@@ -43,7 +43,7 @@
   font-weight: 500;
   line-height: 17px;
   text-align: left;
-  color: black;
+  color: white;
   text-decoration: none;
   cursor: pointer;
 }

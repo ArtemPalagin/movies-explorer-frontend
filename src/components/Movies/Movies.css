@@ -4,6 +4,7 @@
   background-color: transparent;
 }
 .movies__button{
+  align-self: center;
   border: none;
   margin: 0;
   padding: 0;
@@ -12,18 +13,20 @@
   font-weight: 500;
   line-height: 15px;
   text-align: center;
-  background-color: #F9F9F9;
+  background-color: #2F2F2F;
+  color: white;
   border-radius: 6px;
   margin-top: 50px;
   padding-top: 11px;
   padding-bottom: 9px;
   cursor: pointer;
+  border-radius: 6px;
   visibility: visible;
   opacity: 1;
   transition: visibility 0s, opacity 0.2s linear;
 }
 .movies__button:hover{
-  color: #A0A0A0;
+  opacity: 0.6;
 }
 .movies__button_inactive{
   visibility: hidden;
@@ -42,6 +45,9 @@
   .movies__search-wrapper{
     margin-left: 30px;
   }
+  .movies__button{
+    width: 240px
+  }
 }
 @media screen and (min-width: 320px) and (max-width: 768px){
   .movies{
@@ -49,6 +55,9 @@
     padding-bottom: 80px;
     padding-left: calc((100vw - 13.7px)*5/112 + (-30px/7));
     padding-right: calc((100vw - 13.7px)*5/112 + (-30px/7));
+  }
+  .movies__button{
+    width: calc((100vw - 13.7px)*5/28 + (1280px/7));
   }
 }
 @media screen and (min-width: 768px) and (max-width: 1280px){
@@ -58,6 +67,9 @@
     padding-left: calc((100vw - 13.7px)*5/64 + (-30px));
     padding-right: calc((100vw - 13.7px)*5/64 + (-30px));
   }
+  .movies__button{
+    width: 320px
+  }
 }
 @media screen and (min-width: 1280px){
   .movies{
@@ -65,5 +77,8 @@
     padding-bottom: 80px;
     padding-left: calc((100vw - 13.7px)*5/64 + (-30px));
     padding-right: calc((100vw - 13.7px)*5/64 + (-30px));
+  }
+  .movies__button{
+    width: 320px
   }
 }
