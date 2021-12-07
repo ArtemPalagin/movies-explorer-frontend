@@ -65,7 +65,7 @@ class Movies extends React.Component {
     const allMovies = tryParse(localStorage.getItem('allMovies'))
     const shortFilms = tryParse(localStorage.getItem('shortFilms'))
     this.setState({ shortFilms: shortFilms });
-    if (!movies) {
+    if (!movies || !allMovies) {
       return
     }
 
