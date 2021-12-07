@@ -65,14 +65,16 @@ class Movies extends React.Component {
     const allMovies = tryParse(localStorage.getItem('allMovies'))
     const shortFilms = tryParse(localStorage.getItem('shortFilms'))
     this.setState({ shortFilms: shortFilms });
-    if (movies) {
-      this.setState({ cards: movies.filteredArray, numberOfCards: movies.moviesNumber, moviesArray: allMovies });
-      if (allMovies.length === movies.moviesNumber) {
-        this.setState({ buttonActive: false });
-      } else {
-        this.setState({ buttonActive: true });
-      }
+    if (!movies) {
+      return
     }
+
+    this.setState({ 
+      cards: movies.filteredArray, 
+      numberOfCards: movies.moviesNumber, 
+      moviesArray: allMovies,
+      buttonActive: allMovies.length !== movies.moviesNumber
+    });
   }
   downloadMovies = (keyWord) => {
 
