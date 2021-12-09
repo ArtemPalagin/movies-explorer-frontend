@@ -3,7 +3,7 @@ import './HeaderLogged.css';
 import loggedLogo from '../../images/logo.svg';
 import headerIcon from '../../images/header-icon.svg';
 import headerNavigationButtom from '../../images/header-navigation-buttom.svg';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation.js';
 
 class HeaderLogged extends React.Component {
@@ -18,11 +18,14 @@ class HeaderLogged extends React.Component {
   }
   render() {
     return (
-      <header className="header_logged">
+      <header className={`header_logged ${this.props.loggedIn ? "" : "header_logged_inactive"}`}>
         <Navigation
           NavigationClosed={this.state.NavigationClosed}
           CloseNavigation={this.CloseNavigation} />
-        <img className="header_logged__logo" src={loggedLogo} alt="Не получислось загрузить картинку логотипа" />
+        <Link to="/" className="header_logged__logo-link">
+          <img className="header_logged__logo" src={loggedLogo} alt="Не получислось загрузить картинку логотипа" />
+        </Link>
+
         <img className="header_logged__navigation-button" src={headerNavigationButtom} onClick={this.CloseNavigation} alt="Не получилось загрузть иконку для навигации" />
         <div className="header_logged__links-wrapper" >
           <NavLink to="/movies"

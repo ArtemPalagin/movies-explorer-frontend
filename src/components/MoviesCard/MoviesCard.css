@@ -24,6 +24,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 14px;
+  margin-left: 14px;
 }
 
 .movies-card__title {
@@ -67,4 +68,5 @@
   line-height: 13px;
   text-align: left;
   color: #8B8B8B;
+  margin-left: 14px;
 }

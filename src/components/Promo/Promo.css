@@ -4,10 +4,10 @@
   flex-direction: column;
   background-color: #073042;
   width: 100%;
+  overflow: hidden;
 }
 .promo__logo{
   position: absolute;
-  overflow: hidden;
   height: 230px;
 }
 .promo__heading{

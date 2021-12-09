@@ -51,8 +51,8 @@ class App extends React.Component {
       this.userRequest()
     }
     const likedMovies = tryParse(localStorage.getItem('likedMovies'));
-    if(likedMovies){
-      this.setState({ likedMovies: likedMovies})
+    if (likedMovies) {
+      this.setState({ likedMovies: likedMovies })
     }
     this.setState({ loggedIn: true, currentUser: user });
     this.props.history.push("/movies");
@@ -64,7 +64,7 @@ class App extends React.Component {
       this.setState({ registrationErrorMessage: "" });
       this.loginRequest(resp.data.email, password);
     }).catch((err) => {
-      if(err.message){
+      if (err.message) {
         this.setState({ registrationErrorMessage: err.message });
       } else {
         this.setState({ registrationErrorMessage: "что то пошло не так..." });
@@ -81,8 +81,8 @@ class App extends React.Component {
       this.moviesRequest();
       this.userRequest();
     }).catch((err => {
-      
-      if(err.message){
+
+      if (err.message) {
         this.setState({ loginErrorMessage: err.message });
       } else {
         this.setState({ loginErrorMessage: "что то пошло не так..." });
@@ -95,7 +95,7 @@ class App extends React.Component {
       this.setState({ currentUser: user.data, profileErrorMessage: "", });
       localStorage.setItem('user', JSON.stringify(user.data));
     }).catch((err) => {
-      if(err.message){
+      if (err.message) {
         this.setState({ profileErrorMessage: err.message });
       } else {
         this.setState({ profileErrorMessage: "что то пошло не так..." });
@@ -119,7 +119,7 @@ class App extends React.Component {
   }
   likedMoviesRemove = (movie) => {
     const newLikedArray = this.state.likedMovies.filter((elem) => {
-      if(elem.id === movie.id){
+      if (elem.id === movie.id) {
         return false
       }
       return true
@@ -135,6 +135,9 @@ class App extends React.Component {
       console.log(err);
     })
   }
+  loggedChange = () => {
+    this.setState({ loggedIn: false});
+  }
   render() {
     return (
       <CurrentUserContext.Provider value={this.state.currentUser}>
@@ -142,12 +145,16 @@ class App extends React.Component {
 
           <Switch>
 
-            <Route exact path="/">
-              <Header />
+            <Route exact path={["/", "/movies", "/saved-movies", "/profile"]}>
+              <Header loggedIn={this.state.loggedIn} />
             </Route>
 
-            <Route exact path={["/movies", "/saved-movies", "/profile"]}>
-              <HeaderLogged />
+          </Switch>
+
+          <Switch>
+
+            <Route exact path={["/", "/movies", "/saved-movies", "/profile"]}>
+              <HeaderLogged loggedIn={this.state.loggedIn} />
             </Route>
 
           </Switch>
@@ -179,7 +186,7 @@ class App extends React.Component {
             <ProtectedRoute
               path="/profile"
               loggedIn={this.state.loggedIn}
-              component={Profile} profileSubmit={this.profileSubmit} profileErrorMessage={this.state.profileErrorMessage} />
+              component={Profile} profileSubmit={this.profileSubmit} profileErrorMessage={this.state.profileErrorMessage} loggedChange={this.loggedChange} />
 
             <Route path="/">
               <Error />

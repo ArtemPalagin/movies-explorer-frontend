@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function Header(props) {
   return (
-    <header className="header">
+    <header className={`header ${props.loggedIn ? "header_inactive" : ""}`}>
       <img className="header__logo" src={topTabLogo} alt="Не получислось загрузить картинку логотипа" />
       <div className="header__links-wrapper">
         <Link to="/register" className="header__registration-link">Регистрация</Link>

@@ -27,6 +27,7 @@ class Profile extends React.Component {
     localStorage.removeItem('allMovies');
     localStorage.removeItem('likedMovies');
     localStorage.removeItem('shortFilms');
+    this.props.loggedChange();
     this.props.history.push('/');
   }
   handleChange = (e) => {

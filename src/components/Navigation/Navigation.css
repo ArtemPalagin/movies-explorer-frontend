@@ -59,7 +59,18 @@
   padding: 0;
   cursor: pointer;
 }
-
+.navigation__main-link{
+  margin: 0%;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+  text-align: center;
+  margin-bottom: 26px;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
 .navigation__movies-link {
   margin: 0%;
   font-size: 18px;
@@ -73,7 +84,7 @@
   text-decoration: none;
 }
 .navigation__saved-movies-link {
-  margin: 0%;
+  margin: 0;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -89,9 +100,8 @@
   position: absolute;
   bottom: calc((100vw - 13.7px)*11/112 + (116px/7));
 }
-
 .navigation__account-link {
-  margin: 0%;
+  margin: 0;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

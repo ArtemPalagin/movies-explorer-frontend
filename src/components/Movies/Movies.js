@@ -203,7 +203,8 @@ class Movies extends React.Component {
         <SearchForm downloadMovies={this.downloadMovies} changeShortFilms={this.changeShortFilms} shortFilms={this.state.shortFilms} />
         <MoviesCardList cards={this.state.cards} changeLike={this.changeLike} deleteButton={false} />
         <Preloader preloaderActive={this.state.preloaderActive} message={this.state.message} />
-        <button className={`movies__button ${!this.state.buttonActive ? "movies__button_inactive" : ""}`} onClick={this.moreLoading}>Ещё</button>
+        <button className={`movies__button ${ false ? "movies__button_inactive" : ""}`} onClick={this.moreLoading}>Ещё</button>
+        {/* !this.state.buttonActive */}
       </section>
     )
   }
