@@ -10,6 +10,9 @@ class SearchForm extends React.Component {
       text: "",
     }
   }
+  componentDidMount(){
+    this.setState({ text: this.props.keyWord});
+  }
   textChange = (e) => {
     this.setState({ text: e.target.value });
   }

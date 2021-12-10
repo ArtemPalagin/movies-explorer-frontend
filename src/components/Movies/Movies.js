@@ -15,12 +15,9 @@ class Movies extends React.Component {
 
     this.state = {
       preloaderActive: false,
-      shortFilms: false,
       buttonActive: false,
       message: "",
-      numberOfCards: 0,
       cards: [],
-      moviesArray: [],
     }
 
     let lastTime = 0
@@ -62,9 +59,11 @@ class Movies extends React.Component {
       this.setState({ buttonActive: true });
     }
   }
-  downloadMovies = (keyWord, shortFilms) => {
+  downloadMovies = (keyWord) => {
+    this.props.setNumberOfMoviesInStorage(0);
+    this.props.setKeyWordInStorage(keyWord);
 
-    this.setState({ preloaderActive: true, cards: [], numberOfCards: 0, message: "" });
+    this.setState({ preloaderActive: true, cards: [], message: "" });
 
     moviesApi.getMoviesFromServer().then((movies) => {
 
@@ -72,20 +71,20 @@ class Movies extends React.Component {
 
       const filteredMoviesWithLikes = createArrayWithLikes(movies, this.props.likedMovies);
 
-      const filteredMovies = moviesFilter(filteredMoviesWithLikes, keyWord, shortFilms);
+      const filteredMovies = moviesFilter(filteredMoviesWithLikes, keyWord, this.props.shortFilms);
 
       this.setState({ preloaderActive: false });
       if (!filteredMovies.length) {
         this.setState({ message: "Ничего не найдено" });
       }
 
-      const numberOfFilteredMovies = loadingController.download(filteredMovies, this.props.numberOfMovies);
+      const numberOfFilteredMovies = loadingController.download(filteredMovies, 0);
 
       this.props.setNumberOfMoviesInStorage(numberOfFilteredMovies.moviesNumber);
 
       this.setState({ cards: numberOfFilteredMovies.filteredArray, preloaderActive: false });
 
-      if (this.props.movies.length === this.props.numberOfMovies) {
+      if (filteredMovies.length === numberOfFilteredMovies.moviesNumber) {
         this.setState({ buttonActive: false });
       } else {
         this.setState({ buttonActive: true });
@@ -104,31 +103,33 @@ class Movies extends React.Component {
 
     const numberOfFilteredMovies = loadingController.download(filteredMovies, this.props.numberOfMovies);
 
-    this.props.setNumberOfMoviesInStorage()
+    this.props.setNumberOfMoviesInStorage(numberOfFilteredMovies.moviesNumber);
 
-    this.setState({ cards: numberOfFilteredMovies.filteredArray, numberOfCards: numberOfFilteredMovies.moviesNumber });
+    this.setState({ cards: numberOfFilteredMovies.filteredArray });
 
-    if (this.state.moviesArray.length === this.state.numberOfCards) {
+    if (filteredMovies.length === numberOfFilteredMovies.moviesNumber) {
       this.setState({ buttonActive: false });
     } else {
       this.setState({ buttonActive: true });
     }
   }
   moreLoading = () => {
-    const numberOfFilteredMovies = loadingController.additionalDownload(this.state.moviesArray, this.state.numberOfCards);
+    const filteredMovies = moviesFilter(this.props.movies, this.props.keyWord, this.props.shortFilms);
 
-    this.setState({ cards: numberOfFilteredMovies.filteredArray, numberOfCards: numberOfFilteredMovies.moviesNumber + 1 });
+    const numberOfFilteredMovies = loadingController.additionalDownload(filteredMovies, this.props.numberOfMovies);
+
+    this.props.setNumberOfMoviesInStorage(numberOfFilteredMovies.moviesNumber + 1);
+
+    this.setState({ cards: numberOfFilteredMovies.filteredArray });
     // debugger
-    if (this.state.moviesArray.length === this.state.numberOfCards) {
+    if (filteredMovies.length === numberOfFilteredMovies.moviesNumber) {
       this.setState({ buttonActive: false });
     } else {
       this.setState({ buttonActive: true });
     }
-    localStorage.setItem('movies', JSON.stringify(numberOfFilteredMovies));
   }
   changeShortFilms = () => {
-    localStorage.setItem('shortFilms', JSON.stringify(!this.state.shortFilms));
-    this.setState({ shortFilms: !this.state.shortFilms });
+    this.props.setShortFilmsInStorage(!this.props.shortFilms);
   }
   changeLike = (card) => {
 
@@ -145,24 +146,13 @@ class Movies extends React.Component {
           }
           return item;
         })
-        const arrayAfterdisliked = this.state.moviesArray.map(item => {
-          if (card.id === item.id) {
-            return {
-              ...item,
-              liked: false
-            }
-          }
-          return item;
-        })
+        this.setState({ cards: cardsAfterdisliked });
         this.props.likedMoviesRemove(card);
-        localStorage.setItem('movies', JSON.stringify({ filteredArray: cardsAfterdisliked, moviesNumber: cardsAfterdisliked.length }));
-        localStorage.setItem('allMovies', JSON.stringify(arrayAfterdisliked));
-        this.setState({ cards: cardsAfterdisliked, moviesArray: arrayAfterdisliked });
       }).catch((err) => {
         console.log(err);
       })
     } else {
-      mainApi.postMovie(card.country, card.director, card.duration, card.year, card.description, `https://api.nomoreparties.co${card.image.url}`, card.trailerLink, card.nameRU, card.nameEN, `https://api.nomoreparties.co${card.image.formats.thumbnail.url}`, card.id).then((movie) => {
+      mainApi.postMovie(card.country, card.director, card.duration, card.year, card.description, `https://api.nomoreparties.co${card.image.url}`, card.trailerLink, card.nameRU, card.nameEN, `https://api.nomoreparties.co${card.image.formats.thumbnail.url}`, card.id).then(() => {
         const cardsAfterLiked = this.state.cards.map(item => {
           if (card.id === item.id) {
             return {
@@ -172,21 +162,9 @@ class Movies extends React.Component {
           }
           return item;
         })
-
-        const arrayAfterLiked = this.state.moviesArray.map(item => {
-          if (card.id === item.id) {
-            return {
-              ...item,
-              liked: true
-            }
-          }
-          return item;
-        })
         // debugger
-        this.props.likedMoviesAdd(movie);
-        localStorage.setItem('movies', JSON.stringify({ filteredArray: cardsAfterLiked, moviesNumber: cardsAfterLiked.length }));
-        localStorage.setItem('allMovies', JSON.stringify(arrayAfterLiked));
-        this.setState({ cards: cardsAfterLiked, moviesArray: arrayAfterLiked });
+        this.props.likedMoviesAdd(card);
+        this.setState({ cards: cardsAfterLiked });
       }).catch((err) => {
         console.log(err);
       })
@@ -195,7 +173,7 @@ class Movies extends React.Component {
   render() {
     return (
       <section className="movies" >
-        <SearchForm downloadMovies={this.downloadMovies} changeShortFilms={this.changeShortFilms} shortFilms={this.state.shortFilms} />
+        <SearchForm keyWord={this.props.keyWord} downloadMovies={this.downloadMovies} changeShortFilms={this.changeShortFilms} shortFilms={this.props.shortFilms} />
         <MoviesCardList cards={this.state.cards} changeLike={this.changeLike} deleteButton={false} />
         <Preloader preloaderActive={this.state.preloaderActive} message={this.state.message} />
         <button className={`movies__button ${false ? "movies__button_inactive" : ""}`} onClick={this.moreLoading}>Ещё</button>

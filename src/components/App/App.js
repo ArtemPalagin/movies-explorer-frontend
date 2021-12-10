@@ -138,8 +138,18 @@ class App extends React.Component {
 
   }
   likedMoviesAdd = (movie) => {
-    const newLikedArray = [...this.state.likedMovies, movie]
+    const newLikedArray = [...this.state.likedMovies, movie];
+    const arrayAfterLiked = this.state.movies.map(item => {
+      if (movie.id === item.id) {
+        return {
+          ...item,
+          liked: true
+        }
+      }
+      return item;
+    })
     this.setLikedMoviesInStorage(newLikedArray);
+    this.setMoviesInStorage(arrayAfterLiked);
   }
   likedMoviesRemove = (movie) => {
     const newLikedArray = this.state.likedMovies.filter((elem) => {
@@ -148,7 +158,17 @@ class App extends React.Component {
       }
       return true
     })
+    const arrayAfterdisliked = this.state.movies.map(item => {
+      if (movie.id === item.id) {
+        return {
+          ...item,
+          liked: false
+        }
+      }
+      return item;
+    })
     this.setLikedMoviesInStorage(newLikedArray);
+    this.setMoviesInStorage(arrayAfterdisliked);
   }
   userRequest = () => {
     mainApi.getUser().then((user) => {

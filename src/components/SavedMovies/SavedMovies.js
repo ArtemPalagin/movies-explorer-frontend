@@ -12,20 +12,17 @@ class SavedMovies extends React.Component {
     this.state = {
       message: "",
       shortFilms: false,
-      moviesArray: [],
       cards: [],
     }
   }
-  static getDerivedStateFromProps(props, state) {
-    return { moviesArray: props.likedMovies }
-  }
   componentDidMount() {
-    this.setState({ cards: this.props.likedMovies, moviesArray: this.props.likedMovies });
+    this.setState({ cards: this.props.likedMovies });
   }
 
   downloadMovies = (keyWord) => {
 
-    const filteredMovies = moviesFilter(this.state.moviesArray, keyWord, this.state.shortFilms);
+
+    const filteredMovies = moviesFilter(this.props.movies, keyWord, this.state.shortFilms);
 
     this.setState({ cards: filteredMovies })
 
@@ -40,40 +37,6 @@ class SavedMovies extends React.Component {
   }
   deleteMovie = (card) => {
     mainApi.deleteMovie(card.id).then(() => {
-      const tryParse = (str) => {
-        try {
-          return str && JSON.parse(str)
-        } catch (e) {
-          return null
-        }
-      }
-      const movies = tryParse(localStorage.getItem('movies'))
-      const allMovies = tryParse(localStorage.getItem('allMovies'))
-      // debugger
-      if (movies) {
-        const cardsAfterdisliked = movies.filteredArray.map(item => {
-          if (card.id === item.id) {
-
-            return {
-              ...item,
-              liked: false
-            }
-          }
-          return item;
-        })
-        const arrayAfterdisliked = allMovies.map(item => {
-          if (card.id === item.id) {
-            return {
-              ...item,
-              liked: false
-            }
-          }
-          return item;
-        })
-        localStorage.setItem('movies', JSON.stringify({ filteredArray: cardsAfterdisliked, moviesNumber: cardsAfterdisliked.length }));
-        localStorage.setItem('allMovies', JSON.stringify(arrayAfterdisliked));
-      }
-
       const cardsAfterDeletion = this.state.cards.filter((elem) => {
         if (elem.id === card.id) {
           return false;
@@ -81,11 +44,9 @@ class SavedMovies extends React.Component {
           return true;
         }
       })
-      debugger
-      this.props.likedMoviesRemove(card);
+      // debugger
       this.setState({ cards: cardsAfterDeletion });
-      localStorage.setItem('likedMovies', JSON.stringify(cardsAfterDeletion));
-
+      this.props.likedMoviesRemove(card);
     }).catch((err) => {
       console.log(err);
     })
