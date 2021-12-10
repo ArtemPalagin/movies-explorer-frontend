@@ -1,0 +1,174 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  padding-top: 79px;
+  background-color: transparent;
+}
+
+.footer__about{
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+  color: #8B8B8B;
+  border-bottom: 1px #424242 solid;
+}
+
+.footer__wrapper {
+  display: flex;
+}
+
+.footer__year{
+  font-style: normal;
+  font-weight: 400;
+  text-align: left;
+  color: #8B8B8B;
+}
+.footer__links-wrapper{
+  display: flex;
+  justify-content: space-between;
+}
+.footer__link{
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+.footer__link:hover{
+  opacity: 0.6;
+}
+@media screen and (max-width: 320px) {
+  .footer {
+    padding-left: calc((100vw - 13.7px)*5/112 + (-30px/7));
+    padding-right: calc((100vw - 13.7px)*5/112 + (-30px/7));
+  }
+  .footer__about{
+    font-size: calc((100vw - 13.7px)/448 + (79px/7));
+    line-height: calc((100vw - 13.7px)/448 + (100px/7));
+    padding-bottom: calc((100vw - 13.7px)/-448 + (152px/7));
+    margin-bottom: 30px;
+  }
+
+  .footer__wrapper {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+  }
+  .footer__year{
+    font-size: calc((100vw - 13.7px)/448 + (79px/7));
+    line-height: calc((100vw - 13.7px)/448 + (100px/7));
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .footer__links-wrapper{
+    font-size: calc((100vw - 13.7px)/448 + (79px/7));
+    line-height: calc((100vw - 13.7px)/448 + (100px/7));
+    flex-direction: column;
+    margin-bottom: 30px;
+    height: calc((100vw - 13.7px)*5/448 + (458px/7));
+  }
+  .footer__link{
+    font-size: calc((100vw - 13.7px)/448 + (79px/7));
+    line-height: calc((100vw - 13.7px)/448 + (100px/7));
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .footer {
+    padding-left: calc((100vw - 13.7px)*5/112 + (-30px/7));
+    padding-right: calc((100vw - 13.7px)*5/112 + (-30px/7));
+  }
+  .footer__about{
+    font-size: calc((100vw - 13.7px)/448 + (79px/7));
+    line-height: calc((100vw - 13.7px)/448 + (100px/7));
+    padding-bottom: calc((100vw - 13.7px)/-448 + (152px/7));
+    margin-bottom: 30px;
+  }
+
+  .footer__wrapper {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+  }
+  .footer__year{
+    font-size: calc((100vw - 13.7px)/448 + (79px/7));
+    line-height: calc((100vw - 13.7px)/448 + (100px/7));
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .footer__links-wrapper{
+    font-size: calc((100vw - 13.7px)/448 + (79px/7));
+    line-height: calc((100vw - 13.7px)/448 + (100px/7));
+    flex-direction: column;
+    margin-bottom: 30px;
+    height: calc((100vw - 13.7px)*5/448 + (458px/7));
+  }
+  .footer__link{
+    font-size: calc((100vw - 13.7px)/448 + (79px/7));
+    line-height: calc((100vw - 13.7px)/448 + (100px/7));
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+  .footer {
+    padding-left: calc((100vw - 13.7px)*5/64 + (-30px));
+    padding-right: calc((100vw - 13.7px)*5/64 + (-30px));
+  }
+  .footer__about{
+    font-size: 13px;
+    line-height: 16px;
+    padding-bottom: 20px;
+  }
+
+  .footer__wrapper {
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+  }
+  .footer__year{
+    font-size: 13px;
+    line-height: 16px;
+    color: white;
+  }
+  .footer__links-wrapper{
+    font-size: 13px;
+    line-height: 16px;
+    width: 263px;
+    align-items: center;
+  }
+  .footer__link{
+    font-size: 13px;
+    line-height: 16px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .footer {
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+  .footer__about{
+    font-size: 13px;
+    line-height: 16px;
+    padding-bottom: 20px;
+  }
+
+  .footer__wrapper {
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+  }
+  .footer__year{
+    font-size: 13px;
+    line-height: 16px;
+    color: white;
+  }
+  .footer__links-wrapper{
+    font-size: 13px;
+    line-height: 16px;
+    width: 263px;
+    align-items: center;
+  }
+  .footer__link{
+    font-size: 13px;
+    line-height: 16px;
+  }
+}

@@ -1,0 +1,132 @@
+.navigation__body {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 520px;
+  padding-left: calc((100vw - 13.7px)*9/448 + (46px/7));
+  padding-right: calc((100vw - 13.7px)*9/448 + (46px/7));
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  transition: right 0.4s linear;
+  background-color: #202020;
+}
+.navigation__body_closed{
+  right: -220px;
+  transition: right 1s linear;
+}
+.navigation{
+  z-index: 1;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity 0.4s linear;
+}
+.navigation_closed {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.4s, opacity 0.4s linear;
+  /* display: none; */
+}
+
+.navigation::before {
+  content: '';
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  /* height: 100%;
+  width: 100%; */
+  background-color: black;
+  opacity: 0.5;
+  /* z-index: -2; */
+}
+
+.navigation__button {
+  background-image: url(../../images/navigation-cross.svg);
+  background-size: cover;
+  width: 22px;
+  height: 22px;
+  margin-top: calc((100vw - 13.7px)*9/448 + (46px/7));
+  align-self: flex-end;
+  margin-bottom: 100px;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+.navigation__main-link{
+  margin: 0%;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+  text-align: center;
+  margin-bottom: 26px;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+.navigation__movies-link {
+  margin: 0%;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+  text-align: center;
+  margin-bottom: 26px;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+.navigation__saved-movies-link {
+  margin: 0;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+.navigation__wrapper {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: calc((100vw - 13.7px)*11/112 + (116px/7));
+}
+.navigation__account-link {
+  margin: 0;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  margin-right: 17px;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+.navigation__link_active{
+  text-decoration: underline white;
+}
+.navigation__account-image{
+  width: 12px;
+  height: 14px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 7px;
+  padding-right: 7px;
+  background-color: #313131;
+  border-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+  .navigation {
+    display: none;
+  }
+}

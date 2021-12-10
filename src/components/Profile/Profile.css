@@ -1,0 +1,204 @@
+.profile{
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+}
+.profile__greeting{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  align-items: 29px;
+  text-align: center;
+}
+.profile__form{
+  display: flex;
+  flex-direction: column;
+}
+.profile__inpute-wrapper{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 17px;
+}
+.profile__inpute-wrapper:first-of-type{
+  padding-bottom: 16px;
+  border-bottom: 1px #424242 solid;
+}
+.profile__placeholder{
+  margin: 0;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 13px;
+  text-align: left;
+}
+.profile__inpute{
+  color: white;
+  background-color: transparent;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 13px;
+  outline: none;
+  border: none;
+  direction: unset !important;
+  unicode-bidi: bidi-override !important;
+  text-align: right;
+  width: 100%;
+}
+.profile__inpute-username:invalid{
+  color: #EE3465;
+}
+.profile__inpute-email:invalid{
+  color: #EE3465;
+}
+.profile__inpute-email{
+  margin-bottom: 0;
+}
+.profile__span-wrapper{
+  position: relative;
+}
+.profile__span{
+  display: block;
+  position: absolute;
+  top: -60px;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 12px;
+  text-align: left;
+  color: #EE3465;
+}
+
+.profile__span_last{
+  top: 5px;
+}
+
+.profile__button{
+  padding: 0;
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  align-self: center;
+}
+.profile__button:hover{
+  opacity: 0.6;
+}
+.profile__button_invaled{
+  pointer-events: none;
+  color: transparent;
+}
+.profile__button-span-wrapper{
+  position: relative;
+  align-self: center;
+  width: 100%;
+}
+.profile__button-span{
+  display: block;
+  position: absolute;
+  width: 100%;
+  top: -50px;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 12px;
+  text-align: center;
+  background-color: transparent;
+  color: #EE3465;
+}
+.profile__exit{
+  padding: 0;
+  font-style: normal;
+  font-weight: 500;
+  text-align: center;
+  color: #EE3465;
+  margin-top: 16px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  align-self: center;
+}
+
+@media screen and (max-width: 320px){
+  .profile{
+    padding-top: 70px;
+    padding-bottom: 40px;
+    padding-left: calc((100vw - 13.7px)*149/448 + (-535px/7));
+    padding-right: calc((100vw - 13.7px)*149/448 + (-535px/7));
+  }
+  .profile__greeting{
+    margin-bottom: 80px;
+  }
+  .profile__button{
+    font-size: calc((100vw - 13.7px)/448 + (79px/7));
+    line-height: calc((100vw - 13.7px)/448 + (100px/7));
+    margin-top: 379px;
+  }
+  .profile__exit{
+    font-size: calc((100vw - 13.7px)/448 + (79px/7));
+    line-height: calc((100vw - 13.7px)/448 + (100px/7));
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 768px){
+  .profile{
+    padding-top: calc((100vw - 13.7px)*83/224 + (-340px/7));
+    padding-bottom: calc((100vw - 13.7px)*229/448 + (-865px/7));
+    padding-left: calc((100vw - 13.7px)*149/448 + (-535px/7));
+    padding-right: calc((100vw - 13.7px)*149/448 + (-535px/7));
+  }
+  .profile__greeting{
+    margin-bottom: calc((100vw - 13.7px)/28 + (480px/7));
+  }
+  .profile__button{
+    font-size: calc((100vw - 13.7px)/448 + (79px/7));
+    line-height: calc((100vw - 13.7px)/448 + (100px/7));
+    margin-top: calc((100vw - 13.7px)*-169/448 + (3498px/7));
+  }
+  .profile__exit{
+    font-size: calc((100vw - 13.7px)/448 + (79px/7));
+    line-height: calc((100vw - 13.7px)/448 + (100px/7));
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1280px){
+  .profile{
+    padding-top: calc((100vw - 13.7px)*-81/256 + (479px));
+    padding-bottom: calc((100vw - 13.7px)*-199/512 + (1135px/2));
+    padding-left: calc((100vw - 13.7px)/2 + (-205px));
+    padding-right: calc((100vw - 13.7px)/2 + (-205px));
+  }
+  .profile__greeting{
+    margin-bottom: calc((100vw - 13.7px)*27/512 + (111px/2));
+  }
+  .profile__button{
+    font-size: 13px;
+    line-height: 16px;
+    margin-top: calc((100vw - 13.7px)*5/256 + (195px));
+  }
+  .profile__exit{
+    font-size: 13px;
+    line-height: 16px;
+  }
+}
+@media screen and (min-width: 1280px){
+  .profile{
+    padding-top: 74px;
+    padding-bottom: 70px;
+    padding-left: 435px;
+    padding-right: 435px;
+  }
+  .profile__greeting{
+    margin-bottom: 123px;
+  }
+  .profile__button{
+    font-size: 13px;
+    line-height: 16px;
+    margin-top: 220px;
+  }
+  .profile__exit{
+    font-size: 13px;
+    line-height: 16px;
+  }
+}
