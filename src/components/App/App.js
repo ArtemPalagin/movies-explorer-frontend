@@ -26,6 +26,10 @@ class App extends React.Component {
       loggedIn: false,
       currentUser: {},
       likedMovies: [],
+      movies: [],
+      numberOfMovies: 0,
+      keyWord: "",
+      shortFilms: false,
     };
   }
   componentDidMount() {
@@ -105,17 +109,21 @@ class App extends React.Component {
 
   }
   moviesRequest = () => {
-    mainApi.getMovies().then((movies) => {
-      this.setState({ likedMovies: movies });
-      localStorage.setItem('likedMovies', JSON.stringify(movies));
+    moviesApi.getMoviesFromServer().then((movies) => {
+      mainApi.getMovies().then((likedMovies) => {
+        this.setLikedMoviesInStorage(likedMovies);
+      }).catch((err) => {
+        console.log(err);
+      })
+      this.setMoviesInStorage(movies);
     }).catch((err) => {
       console.log(err);
     })
+
   }
   likedMoviesAdd = (movie) => {
     const newLikedArray = [...this.state.likedMovies, movie]
-    this.setState({ likedMovies: newLikedArray });
-    localStorage.setItem('likedMovies', JSON.stringify(newLikedArray));
+    this.setLikedMoviesInStorage(newLikedArray);
   }
   likedMoviesRemove = (movie) => {
     const newLikedArray = this.state.likedMovies.filter((elem) => {
@@ -124,8 +132,7 @@ class App extends React.Component {
       }
       return true
     })
-    this.setState({ likedMovies: newLikedArray });
-    localStorage.setItem('likedMovies', JSON.stringify(newLikedArray));
+    this.setLikedMoviesInStorage(newLikedArray);
   }
   userRequest = () => {
     mainApi.getUser().then((user) => {
@@ -136,7 +143,27 @@ class App extends React.Component {
     })
   }
   loggedChange = () => {
-    this.setState({ loggedIn: false});
+    this.setState({ loggedIn: false });
+  }
+  setMoviesInStorage = (movies) => {
+    localStorage.setItem('movies', JSON.stringify(movies));
+    this.setState({ movies: movies });
+  }
+  setNumberOfMoviesInStorage = (numberOfMovies) => {
+    localStorage.setItem('numberOfMovies', JSON.stringify(numberOfMovies));
+    this.setState({ numberOfMovies: numberOfMovies });
+  }
+  setLikedMoviesInStorage = (likedMovies) => {
+    localStorage.setItem('likedMovies', JSON.stringify(likedMovies));
+    this.setState({ likedMovies: likedMovies });
+  }
+  setKeyWordInStorage = (keyWord) => {
+    localStorage.setItem('keyWord', JSON.stringify(keyWord));
+    this.setState({ keyWord: keyWord });
+  }
+  setShortFilmsInStorage = (shortFilms) => {
+    localStorage.setItem('shortFilms', JSON.stringify(shortFilms));
+    this.setState({ shortFilms: shortFilms });
   }
   render() {
     return (
