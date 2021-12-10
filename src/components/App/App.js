@@ -13,8 +13,10 @@ import Register from '../Register/Register.js';
 import HeaderLogged from '../HeaderLogged/HeaderLogged.js';
 import Error from '../Error/Error.js';
 import * as Authentication from '../../utils/Authentication.js';
-import mainApi from "../../utils/MainApi.js"
+import mainApi from "../../utils/MainApi.js";
+import moviesApi from '../../utils/MoviesApi.js';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
+import createArrayWithLikes from '../../utils/createArrayWithLikes.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -34,7 +36,6 @@ class App extends React.Component {
   }
   componentDidMount() {
     this.tokenCheck();
-    this.setState({ registrationErrorMessage: "", loginErrorMessage: "", profileErrorMessage: "" })
   }
   tokenCheck = () => {
     const jwt = localStorage.getItem('token');
@@ -54,9 +55,23 @@ class App extends React.Component {
     if (!user) {
       this.userRequest()
     }
+    const movies = tryParse(localStorage.getItem('movies'));
     const likedMovies = tryParse(localStorage.getItem('likedMovies'));
-    if (likedMovies) {
-      this.setState({ likedMovies: likedMovies })
+    if (movies) {
+      this.setState({ movies: movies, likedMovies: likedMovies });
+    }
+  
+    const numberOfMovies = tryParse(localStorage.getItem('numberOfMovies'));
+    if (numberOfMovies) {
+      this.setState({ numberOfMovies: numberOfMovies })
+    }
+    const keyWord = tryParse(localStorage.getItem('keyWord'));
+    if (keyWord) {
+      this.setState({ keyWord: keyWord })
+    }
+    const shortFilms = tryParse(localStorage.getItem('shortFilms'));
+    if (shortFilms) {
+      this.setState({ shortFilms: shortFilms })
     }
     this.setState({ loggedIn: true, currentUser: user });
     this.props.history.push("/movies");
@@ -111,11 +126,12 @@ class App extends React.Component {
   moviesRequest = () => {
     moviesApi.getMoviesFromServer().then((movies) => {
       mainApi.getMovies().then((likedMovies) => {
+        const filteredMoviesWithLikes = createArrayWithLikes(movies, likedMovies);
+        this.setMoviesInStorage(filteredMoviesWithLikes);
         this.setLikedMoviesInStorage(likedMovies);
       }).catch((err) => {
         console.log(err);
       })
-      this.setMoviesInStorage(movies);
     }).catch((err) => {
       console.log(err);
     })
@@ -203,12 +219,12 @@ class App extends React.Component {
             <ProtectedRoute
               path="/movies"
               loggedIn={this.state.loggedIn}
-              component={Movies} likedMovies={this.state.likedMovies} likedMoviesAdd={this.likedMoviesAdd} likedMoviesRemove={this.likedMoviesRemove} />
+              component={Movies} setShortFilmsInStorage={this.setShortFilmsInStorage} setKeyWordInStorage={this.setKeyWordInStorage} setLikedMoviesInStorage={this.setLikedMoviesInStorage} setNumberOfMoviesInStorage={this.setNumberOfMoviesInStorage} setMoviesInStorage={this.setMoviesInStorage} shortFilms={this.state.shortFilms} keyWord={this.state.keyWord} numberOfMovies={this.state.numberOfMovies} likedMovies={this.state.likedMovies} likedMoviesAdd={this.likedMoviesAdd} likedMoviesRemove={this.likedMoviesRemove} />
 
             <ProtectedRoute
               path="/saved-movies"
               loggedIn={this.state.loggedIn}
-              component={SavedMovies} likedMovies={this.state.likedMovies} likedMoviesRemove={this.likedMoviesRemove} />
+              component={SavedMovies} setLikedMoviesInStorage={this.setLikedMoviesInStorage} likedMovies={this.state.likedMovies} likedMoviesRemove={this.likedMoviesRemove} />
 
             <ProtectedRoute
               path="/profile"

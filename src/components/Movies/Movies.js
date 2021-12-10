@@ -53,53 +53,44 @@ class Movies extends React.Component {
 
   }
   componentDidMount() {
-    const tryParse = (str) => {
-      try {
-        return str && JSON.parse(str)
-      } catch (e) {
-        return null
-      }
+    const filteredMovies = moviesFilter(this.props.movies, this.props.keyWord, this.props.shortFilms);
+    const numberOfFilteredMovies = loadingController.download(filteredMovies, this.props.numberOfMovies);
+    this.setState({ cards: numberOfFilteredMovies.filteredArray });
+    if (this.props.movies.length === this.props.numberOfMovies) {
+      this.setState({ buttonActive: false });
+    } else {
+      this.setState({ buttonActive: true });
     }
-
-    const movies = tryParse(localStorage.getItem('movies'))
-    const allMovies = tryParse(localStorage.getItem('allMovies'))
-    const shortFilms = tryParse(localStorage.getItem('shortFilms'))
-    this.setState({ shortFilms: shortFilms });
-    if (!movies || !allMovies) {
-      return
-    }
-
-    this.setState({ 
-      cards: movies.filteredArray, 
-      numberOfCards: movies.moviesNumber, 
-      moviesArray: allMovies,
-      buttonActive: allMovies.length !== movies.moviesNumber
-    });
   }
-  downloadMovies = (keyWord) => {
+  downloadMovies = (keyWord, shortFilms) => {
 
     this.setState({ preloaderActive: true, cards: [], numberOfCards: 0, message: "" });
 
     moviesApi.getMoviesFromServer().then((movies) => {
-        
-        const filteredMovies = moviesFilter(movies, keyWord, this.state.shortFilms);
-        
-        const filteredMoviesWithLikes = createArrayWithLikes(filteredMovies, this.props.likedMovies);
-        this.setState({ preloaderActive: false });
-        if (!filteredMoviesWithLikes.length) {
-          this.setState({ message: "Ничего не найдено" });
-        }
 
-        const numberOfFilteredMovies = loadingController.download(filteredMoviesWithLikes, this.state.numberOfCards);
+      this.props.setMoviesInStorage(movies);
 
-        this.setState({ cards: numberOfFilteredMovies.filteredArray, numberOfCards: numberOfFilteredMovies.moviesNumber, moviesArray: filteredMoviesWithLikes, preloaderActive: false });
-        if (this.state.moviesArray.length === this.state.numberOfCards) {
-          this.setState({ buttonActive: false });
-        } else {
-          this.setState({ buttonActive: true });
-        }
-        localStorage.setItem('movies', JSON.stringify(numberOfFilteredMovies));
-        localStorage.setItem('allMovies', JSON.stringify(filteredMoviesWithLikes));
+      const filteredMoviesWithLikes = createArrayWithLikes(movies, this.props.likedMovies);
+
+      const filteredMovies = moviesFilter(filteredMoviesWithLikes, keyWord, shortFilms);
+
+      this.setState({ preloaderActive: false });
+      if (!filteredMovies.length) {
+        this.setState({ message: "Ничего не найдено" });
+      }
+
+      const numberOfFilteredMovies = loadingController.download(filteredMovies, this.props.numberOfMovies);
+
+      this.props.setNumberOfMoviesInStorage(numberOfFilteredMovies.moviesNumber);
+
+      this.setState({ cards: numberOfFilteredMovies.filteredArray, preloaderActive: false });
+
+      if (this.props.movies.length === this.props.numberOfMovies) {
+        this.setState({ buttonActive: false });
+      } else {
+        this.setState({ buttonActive: true });
+      }
+      this.props.setMoviesInStorage(filteredMoviesWithLikes);
     }).catch((err) => {
 
       this.setState({ preloaderActive: false, message: "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз" });
@@ -109,7 +100,11 @@ class Movies extends React.Component {
   }
   resizeLoading = () => {
 
-    const numberOfFilteredMovies = loadingController.download(this.state.moviesArray, this.state.numberOfCards);
+    const filteredMovies = moviesFilter(this.props.movies, this.props.keyWord, this.props.shortFilms);
+
+    const numberOfFilteredMovies = loadingController.download(filteredMovies, this.props.numberOfMovies);
+
+    this.props.setNumberOfMoviesInStorage()
 
     this.setState({ cards: numberOfFilteredMovies.filteredArray, numberOfCards: numberOfFilteredMovies.moviesNumber });
 
@@ -160,7 +155,7 @@ class Movies extends React.Component {
           return item;
         })
         this.props.likedMoviesRemove(card);
-        localStorage.setItem('movies', JSON.stringify({filteredArray: cardsAfterdisliked, moviesNumber: cardsAfterdisliked.length}));
+        localStorage.setItem('movies', JSON.stringify({ filteredArray: cardsAfterdisliked, moviesNumber: cardsAfterdisliked.length }));
         localStorage.setItem('allMovies', JSON.stringify(arrayAfterdisliked));
         this.setState({ cards: cardsAfterdisliked, moviesArray: arrayAfterdisliked });
       }).catch((err) => {
@@ -189,7 +184,7 @@ class Movies extends React.Component {
         })
         // debugger
         this.props.likedMoviesAdd(movie);
-        localStorage.setItem('movies', JSON.stringify({filteredArray: cardsAfterLiked, moviesNumber: cardsAfterLiked.length}));
+        localStorage.setItem('movies', JSON.stringify({ filteredArray: cardsAfterLiked, moviesNumber: cardsAfterLiked.length }));
         localStorage.setItem('allMovies', JSON.stringify(arrayAfterLiked));
         this.setState({ cards: cardsAfterLiked, moviesArray: arrayAfterLiked });
       }).catch((err) => {
@@ -203,7 +198,7 @@ class Movies extends React.Component {
         <SearchForm downloadMovies={this.downloadMovies} changeShortFilms={this.changeShortFilms} shortFilms={this.state.shortFilms} />
         <MoviesCardList cards={this.state.cards} changeLike={this.changeLike} deleteButton={false} />
         <Preloader preloaderActive={this.state.preloaderActive} message={this.state.message} />
-        <button className={`movies__button ${ false ? "movies__button_inactive" : ""}`} onClick={this.moreLoading}>Ещё</button>
+        <button className={`movies__button ${false ? "movies__button_inactive" : ""}`} onClick={this.moreLoading}>Ещё</button>
         {/* !this.state.buttonActive */}
       </section>
     )
