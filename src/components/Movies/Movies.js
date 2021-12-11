@@ -20,37 +20,33 @@ class Movies extends React.Component {
       cards: [],
     }
 
-    let lastTime = 0
-    let scheduled = false
+    this.lastTime = 0
+    this.scheduled = null
 
-    window.addEventListener('resize', () => {
-      if (Date.now() - 200 > lastTime) {
-        this.resizeLoading();
-        lastTime = Date.now();
-        scheduled = false
-        return
-      }
+ 
+  }
+  handleResizeEvent = () => {
+    if (Date.now() - 200 > this.lastTime) {
+      this.resizeLoading();
+      this.lastTime = Date.now();
+      this.scheduled = null
+      return
+    }
 
-      if (scheduled) return
+    if (this.scheduled) return
 
-      scheduled = true
-
-      setTimeout(() => {
-        scheduled = false
-        this.resizeLoading();
-        lastTime = Date.now()
-      }, lastTime + 200 - Date.now())
-
-    })
-
-
-    setTimeout(() => {
-
-    }, 200)
+    this.scheduled = setTimeout(() => {
+      this.scheduled = null
+      this.resizeLoading();
+      this.lastTime = Date.now()
+    }, this.lastTime + 200 - Date.now())
 
   }
   componentDidMount() {
     // debugger
+
+    window.addEventListener('resize', this.handleResizeEvent)
+
     if(!this.props.keyWord){
       return
     }
@@ -62,6 +58,10 @@ class Movies extends React.Component {
     } else {
       this.setState({ buttonActive: true });
     }
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResizeEvent)
+    clearTimeout(this.scheduled)
   }
   downloadMovies = (keyWord) => {
     this.props.setNumberOfMoviesInStorage(0);
