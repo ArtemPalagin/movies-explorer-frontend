@@ -88,7 +88,6 @@ class Movies extends React.Component {
 
       const cards = numberOfFilteredMovies.filteredArray
 
-      console.log({numberOfMovies: this.props.numberOfMovies, numberOfFilteredMovies})
       this.setState({ cards: cards, preloaderActive: false });
 
       if (filteredMovies.length === numberOfFilteredMovies.moviesNumber) {

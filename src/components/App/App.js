@@ -188,7 +188,6 @@ class App extends React.Component {
     this.setState({ movies: movies });
   }
   setNumberOfMoviesInStorage = (numberOfMovies) => {
-    console.log(new window.Error('setNumberOfMoviesInStorage'), numberOfMovies)
     localStorage.setItem('numberOfMovies', JSON.stringify(numberOfMovies));
     this.setState({ numberOfMovies: numberOfMovies });
   }
