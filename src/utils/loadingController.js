@@ -1,15 +1,10 @@
 const arrayCheck = (firstNumber, numberOfCards, array) => {
   const wantedLength = firstNumber + numberOfCards
-  const filteredArray = [];
-
-  for (let i = 0; i < wantedLength; i++) {
-    if (!array[i]) {
-      // debugger
-      return { filteredArray: filteredArray, moviesNumber: i };
-    }
-    filteredArray[i] = array[i];
+  const filteredArray = array.slice(0, wantedLength);
+  return {
+    filteredArray,
+    moviesNumber: filteredArray.length,
   }
-  return { filteredArray: filteredArray, moviesNumber: wantedLength };
 }
 
 export const download = (array, arrayNumber) => {
