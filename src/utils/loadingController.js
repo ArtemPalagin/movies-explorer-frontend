@@ -1,5 +1,5 @@
-const arrayCheck = (firstNumber, numberOfCards, array) => {
-  const wantedLength = firstNumber + numberOfCards
+const arrayCheck = (firstNumber, cardsToAdd, array) => {
+  const wantedLength = firstNumber + cardsToAdd
   const filteredArray = array.slice(0, wantedLength);
   return {
     filteredArray,
