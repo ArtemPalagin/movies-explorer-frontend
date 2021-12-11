@@ -20,9 +20,8 @@ class SavedMovies extends React.Component {
   }
 
   downloadMovies = (keyWord) => {
-
-
-    const filteredMovies = moviesFilter(this.props.movies, keyWord, this.state.shortFilms);
+    debugger
+    const filteredMovies = moviesFilter(this.props.likedMovies, keyWord, this.state.shortFilms);
 
     this.setState({ cards: filteredMovies })
 

@@ -21,6 +21,7 @@
   border: none;
   outline: none;
   background-color: transparent;
+  color: white;
 }
 
 .search-form__inpute::-webkit-input-placeholder {
@@ -32,15 +33,7 @@
 }
 
 .search-form__button {
-  border: none;
-  background-color: transparent;
-  padding: 0;
-  margin: 0;
-}
 
-.search-form__image {
-  margin: 0;
-  padding: 0;
   cursor: pointer;
   font-size: 14px;
   font-style: normal;
@@ -49,11 +42,17 @@
   text-align: center;
   color: white;
   background-color: #4285F4;
+  border: 1px solid #4285F4;
   border-radius: 5px;
-
 }
 
-.search-form__image:hover {
+.search-form__button_invaled {
+  background-color: transparent;
+  color: #8B8B8B;
+  pointer-events: none;
+}
+
+.search-form__button:hover {
   opacity: 0.6;
 }
 
@@ -69,7 +68,7 @@
     padding-left: 12px;
   }
 
-  .search-form__image {
+  .search-form__button {
     padding-left: 18px;
     padding-right: 18px;
     padding-top: 13px;
@@ -95,7 +94,7 @@
     margin-bottom: calc((100vw - 13.7px)/-112 + (237px/7));
   }
 
-  .search-form__image {
+  .search-form__button {
     padding-left: calc((100vw - 13.7px)*9/448 + (81px/7));
     padding-right: calc((100vw - 13.7px)*9/448 + (81px/7));
     padding-top: calc((100vw - 13.7px)/112 + (71px/7));
@@ -116,7 +115,7 @@
     padding-left: 25px;
   }
 
-  .search-form__image {
+  .search-form__button {
     padding-left: 27px;
     padding-right: 27px;
     padding-top: 17px;
@@ -136,7 +135,7 @@
     padding-left: 25px;
   }
 
-  .search-form__image {
+  .search-form__button {
     padding-left: 27px;
     padding-right: 27px;
     padding-top: 17px;

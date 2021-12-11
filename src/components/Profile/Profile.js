@@ -21,11 +21,13 @@ class Profile extends React.Component {
   }
 
   exitRequest = () => {
+    this.props.removeState();
     localStorage.removeItem('token');
     localStorage.removeItem('movies');
     localStorage.removeItem('user');
-    localStorage.removeItem('allMovies');
+    localStorage.removeItem('numberOfMovies');
     localStorage.removeItem('likedMovies');
+    localStorage.removeItem('keyWord');
     localStorage.removeItem('shortFilms');
     this.props.loggedChange();
     this.props.history.push('/');
@@ -33,7 +35,7 @@ class Profile extends React.Component {
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
-      [`${e.target.name}IsInvalid`]: !e.target.valid && e.target.validationMessage 
+      [`${e.target.name}IsInvalid`]: !e.target.valid && e.target.validationMessage
     });
   }
   handleSubmit = (e) => {
@@ -61,7 +63,7 @@ class Profile extends React.Component {
 
     const okToSubmit = this.allowedToSubmit()
 
-    
+
     return (
       <section className="profile">
         <h1 className="profile__greeting">{`Привет, ${this.context.name}!`}</h1>
@@ -71,7 +73,7 @@ class Profile extends React.Component {
             <input
               value={this.state.name}
               onChange={this.handleChange}
-              className="profile__inpute profile__inpute-username" id="username-input" type="text"  pattern="[A-Za-zА-Яа-яЁё\s\-]+" name="name" minLength="2" maxLength="40" required />
+              className="profile__inpute profile__inpute-username" id="username-input" type="text" pattern="[A-Za-zА-Яа-яЁё\s\-]+" name="name" minLength="2" maxLength="40" required />
           </div>
           <div className="profile__span-wrapper">{this.state.nameIsInvalid
             ? <span className="profile__span">{this.state.nameIsInvalid}</span>

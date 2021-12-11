@@ -10,7 +10,7 @@ class Navigation extends React.Component {
       <div className={`navigation  ${(this.props.NavigationClosed) ? ('navigation_closed') : ('')}`}>
         <div className={`navigation__body ${(this.props.NavigationClosed) ? ('navigation__body_closed') : ('')}`}>
           <button className="navigation__button" onClick={this.props.CloseNavigation}></button>
-          <NavLink
+          <NavLink exact
             to="/"
             activeClassName="navigation__link_active"
             className="navigation__main-link"

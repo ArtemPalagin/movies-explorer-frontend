@@ -60,7 +60,7 @@ class App extends React.Component {
     if (movies) {
       this.setState({ movies: movies, likedMovies: likedMovies });
     }
-  
+
     const numberOfMovies = tryParse(localStorage.getItem('numberOfMovies'));
     if (numberOfMovies) {
       this.setState({ numberOfMovies: numberOfMovies })
@@ -96,7 +96,7 @@ class App extends React.Component {
     Authentication.login(email, password).then((data) => {
       localStorage.setItem('token', data.token);
       this.setState({ loggedIn: true, loginErrorMessage: "" });
-      this.props.history.push('/movies');
+      // this.props.history.push('/movies');
       this.moviesRequest();
       this.userRequest();
     }).catch((err => {
@@ -126,9 +126,11 @@ class App extends React.Component {
   moviesRequest = () => {
     moviesApi.getMoviesFromServer().then((movies) => {
       mainApi.getMovies().then((likedMovies) => {
+        // debugger
         const filteredMoviesWithLikes = createArrayWithLikes(movies, likedMovies);
         this.setMoviesInStorage(filteredMoviesWithLikes);
         this.setLikedMoviesInStorage(likedMovies);
+        this.props.history.push('/movies');
       }).catch((err) => {
         console.log(err);
       })
@@ -186,6 +188,7 @@ class App extends React.Component {
     this.setState({ movies: movies });
   }
   setNumberOfMoviesInStorage = (numberOfMovies) => {
+    console.log(new window.Error('setNumberOfMoviesInStorage'), numberOfMovies)
     localStorage.setItem('numberOfMovies', JSON.stringify(numberOfMovies));
     this.setState({ numberOfMovies: numberOfMovies });
   }
@@ -199,7 +202,12 @@ class App extends React.Component {
   }
   setShortFilmsInStorage = (shortFilms) => {
     localStorage.setItem('shortFilms', JSON.stringify(shortFilms));
+  }
+  setShortFilmsInState = (shortFilms) => {
     this.setState({ shortFilms: shortFilms });
+  }
+  removeState = () => {
+    this.setState({ likedMovies: [], movies: [], numberOfMovies: 0, keyWord: "", shortFilms: false,})
   }
   render() {
     return (
@@ -239,7 +247,7 @@ class App extends React.Component {
             <ProtectedRoute
               path="/movies"
               loggedIn={this.state.loggedIn}
-              component={Movies} setShortFilmsInStorage={this.setShortFilmsInStorage} setKeyWordInStorage={this.setKeyWordInStorage} setLikedMoviesInStorage={this.setLikedMoviesInStorage} setNumberOfMoviesInStorage={this.setNumberOfMoviesInStorage} setMoviesInStorage={this.setMoviesInStorage} shortFilms={this.state.shortFilms} keyWord={this.state.keyWord} numberOfMovies={this.state.numberOfMovies} likedMovies={this.state.likedMovies} likedMoviesAdd={this.likedMoviesAdd} likedMoviesRemove={this.likedMoviesRemove} />
+              component={Movies} setShortFilmsInState={this.setShortFilmsInState} movies={this.state.movies} setShortFilmsInStorage={this.setShortFilmsInStorage} setKeyWordInStorage={this.setKeyWordInStorage} setLikedMoviesInStorage={this.setLikedMoviesInStorage} setNumberOfMoviesInStorage={this.setNumberOfMoviesInStorage} setMoviesInStorage={this.setMoviesInStorage} shortFilms={this.state.shortFilms} keyWord={this.state.keyWord} numberOfMovies={this.state.numberOfMovies} likedMovies={this.state.likedMovies} likedMoviesAdd={this.likedMoviesAdd} likedMoviesRemove={this.likedMoviesRemove} />
 
             <ProtectedRoute
               path="/saved-movies"
@@ -249,7 +257,7 @@ class App extends React.Component {
             <ProtectedRoute
               path="/profile"
               loggedIn={this.state.loggedIn}
-              component={Profile} profileSubmit={this.profileSubmit} profileErrorMessage={this.state.profileErrorMessage} loggedChange={this.loggedChange} />
+              component={Profile} removeState={this.removeState} profileSubmit={this.profileSubmit} profileErrorMessage={this.state.profileErrorMessage} loggedChange={this.loggedChange} />
 
             <Route path="/">
               <Error />

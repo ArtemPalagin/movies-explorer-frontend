@@ -1,5 +1,9 @@
-const moviesFilter = (array, keyword, shortFilms, likedArray) => {
+const moviesFilter = (array, keyword, shortFilms) => {
+  if(!keyword){
+    return []
+  }
   let films = [];
+  // debugger
   if (shortFilms) {
     films = array.filter((film) => {
       if (film.duration <= 40) {

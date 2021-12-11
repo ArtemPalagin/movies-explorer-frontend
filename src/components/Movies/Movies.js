@@ -50,6 +50,10 @@ class Movies extends React.Component {
 
   }
   componentDidMount() {
+    // debugger
+    if(!this.props.keyWord){
+      return
+    }
     const filteredMovies = moviesFilter(this.props.movies, this.props.keyWord, this.props.shortFilms);
     const numberOfFilteredMovies = loadingController.download(filteredMovies, this.props.numberOfMovies);
     this.setState({ cards: numberOfFilteredMovies.filteredArray });
@@ -82,7 +86,10 @@ class Movies extends React.Component {
 
       this.props.setNumberOfMoviesInStorage(numberOfFilteredMovies.moviesNumber);
 
-      this.setState({ cards: numberOfFilteredMovies.filteredArray, preloaderActive: false });
+      const cards = numberOfFilteredMovies.filteredArray
+
+      console.log({numberOfMovies: this.props.numberOfMovies, numberOfFilteredMovies})
+      this.setState({ cards: cards, preloaderActive: false });
 
       if (filteredMovies.length === numberOfFilteredMovies.moviesNumber) {
         this.setState({ buttonActive: false });
@@ -104,7 +111,7 @@ class Movies extends React.Component {
     const numberOfFilteredMovies = loadingController.download(filteredMovies, this.props.numberOfMovies);
 
     this.props.setNumberOfMoviesInStorage(numberOfFilteredMovies.moviesNumber);
-
+    // debugger
     this.setState({ cards: numberOfFilteredMovies.filteredArray });
 
     if (filteredMovies.length === numberOfFilteredMovies.moviesNumber) {
@@ -118,7 +125,7 @@ class Movies extends React.Component {
 
     const numberOfFilteredMovies = loadingController.additionalDownload(filteredMovies, this.props.numberOfMovies);
 
-    this.props.setNumberOfMoviesInStorage(numberOfFilteredMovies.moviesNumber + 1);
+    this.props.setNumberOfMoviesInStorage(numberOfFilteredMovies.moviesNumber);
 
     this.setState({ cards: numberOfFilteredMovies.filteredArray });
     // debugger
@@ -127,9 +134,6 @@ class Movies extends React.Component {
     } else {
       this.setState({ buttonActive: true });
     }
-  }
-  changeShortFilms = () => {
-    this.props.setShortFilmsInStorage(!this.props.shortFilms);
   }
   changeLike = (card) => {
 
@@ -170,14 +174,19 @@ class Movies extends React.Component {
       })
     }
   }
+  changeShortFilms = () => {
+    this.props.setShortFilmsInState(!this.props.shortFilms);
+  }
+  searchSubmit = () => {
+    this.props.setShortFilmsInStorage(this.props.shortFilms);
+  }
   render() {
     return (
       <section className="movies" >
-        <SearchForm keyWord={this.props.keyWord} downloadMovies={this.downloadMovies} changeShortFilms={this.changeShortFilms} shortFilms={this.props.shortFilms} />
+        <SearchForm searchSubmit={this.searchSubmit} keyWord={this.props.keyWord} downloadMovies={this.downloadMovies} changeShortFilms={this.changeShortFilms} shortFilms={this.props.shortFilms} />
         <MoviesCardList cards={this.state.cards} changeLike={this.changeLike} deleteButton={false} />
         <Preloader preloaderActive={this.state.preloaderActive} message={this.state.message} />
-        <button className={`movies__button ${false ? "movies__button_inactive" : ""}`} onClick={this.moreLoading}>Ещё</button>
-        {/* !this.state.buttonActive */}
+        <button className={`movies__button ${ !this.state.buttonActive ? "movies__button_inactive" : ""}`} onClick={this.moreLoading}>Ещё</button>
       </section>
     )
   }

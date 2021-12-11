@@ -46,6 +46,7 @@
   border: none;
   border-radius: 36px;
   cursor: pointer;
+  margin-right: 14px;
 }
 
 .movies-card__like-button:hover {
