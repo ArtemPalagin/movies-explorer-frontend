@@ -11,10 +11,11 @@ export const download = (array, arrayNumber) => {
 
   if (window.innerWidth >= 903) {
     if (arrayNumber % 4 !== 0) {
-      if(array.length <= arrayNumber + (4 - (arrayNumber % 4))){
+      const cardsToAdd = arrayNumber + (4 - (arrayNumber % 4))
+      if(array.length <= cardsToAdd){
         return arrayCheck(0, array.length, array);
       }
-      return arrayCheck(0, arrayNumber + (4 - (arrayNumber % 4)), array);
+      return arrayCheck(0, cardsToAdd, array);
     }
     if (arrayNumber > 16) {
       return arrayCheck(0, arrayNumber, array);
@@ -23,10 +24,11 @@ export const download = (array, arrayNumber) => {
   }
   if (window.innerWidth >= 768 && window.innerWidth < 930) {
     if (arrayNumber % 3 !== 0) {
-      if(array.length <= arrayNumber + (3 - (arrayNumber % 3))){
+      const cardsToAdd = arrayNumber + (3 - (arrayNumber % 3))
+      if(array.length <= cardsToAdd){
         return arrayCheck(0, array.length, array);
       }
-      return arrayCheck(0, arrayNumber + (3 - (arrayNumber % 3)), array);
+      return arrayCheck(0, cardsToAdd, array);
     }
     if (arrayNumber > 12) {
       return arrayCheck(0, arrayNumber, array);
@@ -35,10 +37,11 @@ export const download = (array, arrayNumber) => {
   }
   if (window.innerWidth >= 430 && window.innerWidth < 768) {
     if (arrayNumber % 2 !== 0) {
-      if(array.length <= arrayNumber + (2 - (arrayNumber % 2))){
+      const cardsToAdd = arrayNumber + (2 - (arrayNumber % 2))
+      if(array.length <= cardsToAdd){
         return arrayCheck(0, array.length, array);
       }
-      return arrayCheck(0, arrayNumber + (2 - (arrayNumber % 2)), array);
+      return arrayCheck(0, cardsToAdd, array);
     }
     if (arrayNumber > 8) {
       return arrayCheck(0, arrayNumber, array);
