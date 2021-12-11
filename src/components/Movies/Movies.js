@@ -53,7 +53,8 @@ class Movies extends React.Component {
     const filteredMovies = moviesFilter(this.props.movies, this.props.keyWord, this.props.shortFilms);
     const numberOfFilteredMovies = loadingController.download(filteredMovies, this.props.numberOfMovies);
     this.setState({ cards: numberOfFilteredMovies.filteredArray });
-    if (this.props.movies.length === this.props.numberOfMovies) {
+    // debugger
+    if (filteredMovies.length === numberOfFilteredMovies.moviesNumber) {
       this.setState({ buttonActive: false });
     } else {
       this.setState({ buttonActive: true });
@@ -67,7 +68,7 @@ class Movies extends React.Component {
     this.props.setNumberOfMoviesInStorage(0);
     this.props.setKeyWordInStorage(keyWord);
 
-    this.setState({ preloaderActive: true, cards: [], message: "" });
+    this.setState({ preloaderActive: true, cards: [], message: "", buttonActive: false });
 
     moviesApi.getMoviesFromServer().then((movies) => {
 
