@@ -1,16 +1,19 @@
 const arrayCheck = (firstNumber, numberOfCards, array) => {
+  const wantedLength = firstNumber + numberOfCards
   const filteredArray = [];
-  for (let i = 0; i < numberOfCards + firstNumber; i++) {
+
+  for (let i = 0; i < wantedLength; i++) {
     if (!array[i]) {
       // debugger
       return { filteredArray: filteredArray, moviesNumber: i };
     }
     filteredArray[i] = array[i];
   }
-  return { filteredArray: filteredArray, moviesNumber: firstNumber + numberOfCards };
+  return { filteredArray: filteredArray, moviesNumber: wantedLength };
 }
 
 export const download = (array, arrayNumber) => {
+
   if (window.innerWidth >= 903) {
     if (array.length <= 16) {
       return arrayCheck(arrayNumber, array.length, array);
