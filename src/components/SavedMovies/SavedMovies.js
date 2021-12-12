@@ -16,6 +16,16 @@ class SavedMovies extends React.Component {
     }
   }
   componentDidMount() {
+    this.acceptMovies()
+  }
+  componentDidUpdate(prev) {
+    if (prev.likedMovies === this.props.likedMovies) {
+      return
+    }
+
+    this.acceptMovies()
+  }
+  acceptMovies() {
     this.setState({ cards: this.props.likedMovies });
   }
 

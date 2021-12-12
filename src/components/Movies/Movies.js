@@ -47,18 +47,26 @@ class Movies extends React.Component {
 
     window.addEventListener('resize', this.handleResizeEvent)
 
+    this.calcFilms()
+  }
+  componentDidUpdate(prev) {
+    if (prev.keyWord === this.props.keyWord && prev.movies === this.props.movies && prev.shortFilms === this.props.shortFilms) {
+      return false
+    }
+
+    this.calcFilms()
+  }
+  calcFilms() {
     if(!this.props.keyWord){
+      this.setState({ cards: [], buttonActive: false });
       return
     }
     const filteredMovies = moviesFilter(this.props.movies, this.props.keyWord, this.props.shortFilms);
     const numberOfFilteredMovies = loadingController.download(filteredMovies, this.props.numberOfMovies);
-    this.setState({ cards: numberOfFilteredMovies.filteredArray });
-    // debugger
-    if (filteredMovies.length === numberOfFilteredMovies.moviesNumber) {
-      this.setState({ buttonActive: false });
-    } else {
-      this.setState({ buttonActive: true });
-    }
+    this.setState({ 
+      cards: numberOfFilteredMovies.filteredArray,
+      buttonActive: filteredMovies.length !== numberOfFilteredMovies.moviesNumber
+    });
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResizeEvent)
