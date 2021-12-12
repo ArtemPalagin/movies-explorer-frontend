@@ -18,15 +18,26 @@ import moviesApi from '../../utils/MoviesApi.js';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import createArrayWithLikes from '../../utils/createArrayWithLikes.js';
 
+const tryParse = (str) => {
+  try {
+    return str && JSON.parse(str)
+  } catch (e) {
+    return null
+  }
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    const loggedIn = Boolean(localStorage.getItem('token'))
+
     this.state = {
       registrationErrorMessage: "",
       loginErrorMessage: "",
       profileErrorMessage: "",
-      loggedIn: false,
-      currentUser: {},
+      loggedIn,
+      currentUser: loggedIn ? tryParse(localStorage.getItem('user')) : {},
       likedMovies: [],
       movies: [],
       numberOfMovies: 0,
@@ -38,20 +49,10 @@ class App extends React.Component {
     this.tokenCheck();
   }
   tokenCheck = () => {
-    const jwt = localStorage.getItem('token');
-    const tryParse = (str) => {
-      try {
-        return str && JSON.parse(str)
-      } catch (e) {
-        return null
-      }
-    }
-
-    if (!jwt) {
+    const {user, loggedIn} = this.state
+    if (!loggedIn) {
       return
     }
-
-    const user = tryParse(localStorage.getItem('user'));
     if (!user) {
       this.userRequest()
     }
@@ -73,7 +74,7 @@ class App extends React.Component {
     if (shortFilms) {
       this.setState({ shortFilms: shortFilms })
     }
-    this.setState({ loggedIn: true, currentUser: user });
+
   }
 
   registrationRequest = (name, email, password) => {
