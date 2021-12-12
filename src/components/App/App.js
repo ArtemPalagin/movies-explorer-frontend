@@ -74,7 +74,6 @@ class App extends React.Component {
       this.setState({ shortFilms: shortFilms })
     }
     this.setState({ loggedIn: true, currentUser: user });
-    this.props.history.push("/movies");
   }
 
   registrationRequest = (name, email, password) => {
