@@ -27,7 +27,7 @@ class Movies extends React.Component {
   }
   handleResizeEvent = () => {
     if (Date.now() - 200 > this.lastTime) {
-      this.resizeLoading();
+      this.loadingResize();
       this.lastTime = Date.now();
       this.scheduled = null
       return
@@ -37,7 +37,7 @@ class Movies extends React.Component {
 
     this.scheduled = setTimeout(() => {
       this.scheduled = null
-      this.resizeLoading();
+      this.loadingResize();
       this.lastTime = Date.now()
     }, this.lastTime + 200 - Date.now())
 
@@ -112,7 +112,7 @@ class Movies extends React.Component {
       console.log(err);
     })
   }
-  resizeLoading = () => {
+  loadingResize = () => {
 
     const filteredMovies = moviesFilter(this.props.movies, this.props.keyWord, this.props.shortFilms);
 
@@ -128,7 +128,7 @@ class Movies extends React.Component {
       this.setState({ buttonActive: true });
     }
   }
-  moreLoading = () => {
+  loadingMore = () => {
     const filteredMovies = moviesFilter(this.props.movies, this.props.keyWord, this.props.shortFilms);
 
     const numberOfFilteredMovies = loadingController.additionalDownload(filteredMovies, this.props.numberOfMovies);
@@ -159,7 +159,7 @@ class Movies extends React.Component {
           return item;
         })
         this.setState({ cards: cardsAfterdisliked });
-        this.props.likedMoviesRemove(card);
+        this.props.removeLikedMovies(card);
       }).catch((err) => {
         console.log(err);
       })
@@ -175,7 +175,7 @@ class Movies extends React.Component {
           return item;
         })
         // debugger
-        this.props.likedMoviesAdd(card);
+        this.props.addLikedMovies(card);
         this.setState({ cards: cardsAfterLiked });
       }).catch((err) => {
         console.log(err);
@@ -194,7 +194,7 @@ class Movies extends React.Component {
         <SearchForm searchSubmit={this.searchSubmit} keyWord={this.props.keyWord} downloadMovies={this.downloadMovies} changeShortFilms={this.changeShortFilms} shortFilms={this.props.shortFilms} />
         <MoviesCardList cards={this.state.cards} changeLike={this.changeLike} deleteButton={false} />
         <Preloader preloaderActive={this.state.preloaderActive} message={this.state.message} />
-        <button className={`movies__button ${ !this.state.buttonActive ? "movies__button_inactive" : ""}`} onClick={this.moreLoading}>Ещё</button>
+        <button className={`movies__button ${ !this.state.buttonActive ? "movies__button_inactive" : ""}`} onClick={this.loadingMore}>Ещё</button>
       </section>
     )
   }

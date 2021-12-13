@@ -46,15 +46,15 @@ class App extends React.Component {
     };
   }
   componentDidMount() {
-    this.tokenCheck();
+    this.checkToken();
   }
-  tokenCheck = () => {
+  checkToken = () => {
     const {user, loggedIn} = this.state
     if (!loggedIn) {
       return
     }
     if (!user) {
-      this.userRequest()
+      this.requestUser()
     }
     const movies = tryParse(localStorage.getItem('movies'));
     const likedMovies = tryParse(localStorage.getItem('likedMovies'));
@@ -77,11 +77,11 @@ class App extends React.Component {
 
   }
 
-  registrationRequest = (name, email, password) => {
+  requestRegistration = (name, email, password) => {
 
     Authentication.register(name, email, password).then((resp) => {
       this.setState({ registrationErrorMessage: "" });
-      this.loginRequest(resp.data.email, password);
+      this.requestLogin(resp.data.email, password);
     }).catch((err) => {
       if (err.message) {
         this.setState({ registrationErrorMessage: err.message });
@@ -91,14 +91,14 @@ class App extends React.Component {
       console.log(err);
     });
   }
-  loginRequest = (email, password) => {
+  requestLogin = (email, password) => {
 
     Authentication.login(email, password).then((data) => {
       localStorage.setItem('token', data.token);
       this.setState({ loggedIn: true, loginErrorMessage: "" });
       // this.props.history.push('/movies');
-      this.moviesRequest();
-      this.userRequest();
+      this.requestMovies();
+      this.requestUser();
     }).catch((err => {
 
       if (err.message) {
@@ -109,7 +109,7 @@ class App extends React.Component {
       console.log(err);
     }))
   }
-  profileSubmit = (name, email) => {
+  submitProfile = (name, email) => {
     mainApi.patchUser(name, email).then((user) => {
       this.setState({ currentUser: user.data, profileErrorMessage: "", });
       localStorage.setItem('user', JSON.stringify(user.data));
@@ -123,7 +123,7 @@ class App extends React.Component {
     })
 
   }
-  moviesRequest = () => {
+  requestMovies = () => {
     moviesApi.getMoviesFromServer().then((movies) => {
       mainApi.getMovies().then((likedMovies) => {
         // debugger
@@ -139,7 +139,7 @@ class App extends React.Component {
     })
 
   }
-  likedMoviesAdd = (movie) => {
+  addLikedMovies = (movie) => {
     const newLikedArray = [...this.state.likedMovies, movie];
     const arrayAfterLiked = this.state.movies.map(item => {
       if (movie.id === item.id) {
@@ -153,7 +153,7 @@ class App extends React.Component {
     this.setLikedMoviesInStorage(newLikedArray);
     this.setMoviesInStorage(arrayAfterLiked);
   }
-  likedMoviesRemove = (movie) => {
+  removeLikedMovies = (movie) => {
     const newLikedArray = this.state.likedMovies.filter((elem) => {
       if (elem.id === movie.id) {
         return false
@@ -172,7 +172,7 @@ class App extends React.Component {
     this.setLikedMoviesInStorage(newLikedArray);
     this.setMoviesInStorage(arrayAfterdisliked);
   }
-  userRequest = () => {
+  requestUser = () => {
     mainApi.getUser().then((user) => {
       this.setState({ currentUser: user.data });
       localStorage.setItem('user', JSON.stringify(user.data));
@@ -180,7 +180,7 @@ class App extends React.Component {
       console.log(err);
     })
   }
-  loggedChange = () => {
+  changeLogged = () => {
     this.setState({ loggedIn: false });
   }
   setMoviesInStorage = (movies) => {
@@ -236,27 +236,27 @@ class App extends React.Component {
             </Route>
 
             <Route exact path="/register">
-              <Register registrationRequest={this.registrationRequest} registrationErrorMessage={this.state.registrationErrorMessage} />
+              <Register requestRegistration={this.requestRegistration} registrationErrorMessage={this.state.registrationErrorMessage} />
             </Route>
 
             <Route exact path="/sign-in">
-              <Login loginRequest={this.loginRequest} loginErrorMessage={this.state.loginErrorMessage} />
+              <Login requestLogin={this.requestLogin} loginErrorMessage={this.state.loginErrorMessage} />
             </Route>
 
             <ProtectedRoute
               path="/movies"
               loggedIn={this.state.loggedIn}
-              component={Movies} setShortFilmsInState={this.setShortFilmsInState} movies={this.state.movies} setShortFilmsInStorage={this.setShortFilmsInStorage} setKeyWordInStorage={this.setKeyWordInStorage} setLikedMoviesInStorage={this.setLikedMoviesInStorage} setNumberOfMoviesInStorage={this.setNumberOfMoviesInStorage} setMoviesInStorage={this.setMoviesInStorage} shortFilms={this.state.shortFilms} keyWord={this.state.keyWord} numberOfMovies={this.state.numberOfMovies} likedMovies={this.state.likedMovies} likedMoviesAdd={this.likedMoviesAdd} likedMoviesRemove={this.likedMoviesRemove} />
+              component={Movies} setShortFilmsInState={this.setShortFilmsInState} movies={this.state.movies} setShortFilmsInStorage={this.setShortFilmsInStorage} setKeyWordInStorage={this.setKeyWordInStorage} setLikedMoviesInStorage={this.setLikedMoviesInStorage} setNumberOfMoviesInStorage={this.setNumberOfMoviesInStorage} setMoviesInStorage={this.setMoviesInStorage} shortFilms={this.state.shortFilms} keyWord={this.state.keyWord} numberOfMovies={this.state.numberOfMovies} likedMovies={this.state.likedMovies} addLikedMovies={this.addLikedMovies} removeLikedMovies={this.removeLikedMovies} />
 
             <ProtectedRoute
               path="/saved-movies"
               loggedIn={this.state.loggedIn}
-              component={SavedMovies} setLikedMoviesInStorage={this.setLikedMoviesInStorage} likedMovies={this.state.likedMovies} likedMoviesRemove={this.likedMoviesRemove} />
+              component={SavedMovies} setLikedMoviesInStorage={this.setLikedMoviesInStorage} likedMovies={this.state.likedMovies} removeLikedMovies={this.removeLikedMovies} />
 
             <ProtectedRoute
               path="/profile"
               loggedIn={this.state.loggedIn}
-              component={Profile} removeState={this.removeState} profileSubmit={this.profileSubmit} profileErrorMessage={this.state.profileErrorMessage} loggedChange={this.loggedChange} />
+              component={Profile} removeState={this.removeState} submitProfile={this.submitProfile} profileErrorMessage={this.state.profileErrorMessage} changeLogged={this.changeLogged} />
 
             <Route path="/">
               <Error />

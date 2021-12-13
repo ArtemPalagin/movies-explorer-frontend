@@ -20,7 +20,7 @@ class Profile extends React.Component {
     this.setState({ name: this.context?.name, email: this.context?.email });
   }
 
-  exitRequest = () => {
+  requestExit = () => {
     this.props.removeState();
     localStorage.removeItem('token');
     localStorage.removeItem('movies');
@@ -29,7 +29,7 @@ class Profile extends React.Component {
     localStorage.removeItem('likedMovies');
     localStorage.removeItem('keyWord');
     localStorage.removeItem('shortFilms');
-    this.props.loggedChange();
+    this.props.changeLogged();
     this.props.history.push('/');
   }
   handleChange = (e) => {
@@ -47,7 +47,7 @@ class Profile extends React.Component {
 
     const form = e.target;
     const data = Object.fromEntries(new FormData(form).entries());
-    this.props.profileSubmit(data.name, data.email);
+    this.props.submitProfile(data.name, data.email);
   }
   allowedToSubmit() {
     const disableButton = this.state.nameIsInvalid || this.state.emailIsInvalid
@@ -95,7 +95,7 @@ class Profile extends React.Component {
             {this.props.profileErrorMessage ? <span className="profile__button-span">{this.props.profileErrorMessage}</span> : null}
           </div>
         </form>
-        <button className="profile__exit" onClick={this.exitRequest}>Выйти из аккаунта</button>
+        <button className="profile__exit" onClick={this.requestExit}>Выйти из аккаунта</button>
       </section>
     )
   }

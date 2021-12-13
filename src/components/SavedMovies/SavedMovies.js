@@ -55,7 +55,7 @@ class SavedMovies extends React.Component {
       })
       // debugger
       this.setState({ cards: cardsAfterDeletion });
-      this.props.likedMoviesRemove(card);
+      this.props.removeLikedMovies(card);
     }).catch((err) => {
       console.log(err);
     })

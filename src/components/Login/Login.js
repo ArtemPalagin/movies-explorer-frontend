@@ -24,7 +24,7 @@ class Login extends React.Component {
     }
     const form = e.target;
     const data = Object.fromEntries(new FormData(form).entries());
-    this.props.loginRequest(data.email, data.password);
+    this.props.requestLogin(data.email, data.password);
 
     e.target.reset();
     this.setState({ emailIsInvalid: true, passwordIsInvalid: true })

@@ -22,7 +22,7 @@ class SearchForm extends React.Component {
       text: this.props.keyWord || ''
     })
   }
-  textChange = (e) => {
+  changeText = (e) => {
     this.setState({ text: e.target.value });
     // debugger
   }
@@ -41,7 +41,7 @@ class SearchForm extends React.Component {
     return (
       <div className="search-form" >
         <form className="search-form__wrapper" onSubmit={this.handleSubmit}>
-          <input className="search-form__inpute" value={this.state.text} onChange={this.textChange} placeholder="Фильм" type="text" name="search" />
+          <input className="search-form__inpute" value={this.state.text} onChange={this.changeText} placeholder="Фильм" type="text" name="search" />
           <button className={`search-form__button ${ this.state.text.length ? "" : "search-form__button_invaled"}`}>Поиск</button>
         </form>
         <FilterCheckbox changeShortFilms={this.props.changeShortFilms} shortFilms={this.props.shortFilms} />

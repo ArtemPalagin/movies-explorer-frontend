@@ -29,7 +29,7 @@ class Register extends React.Component {
     }
     const form = e.target;
     const data = Object.fromEntries(new FormData(form).entries());
-    this.props.registrationRequest(data.name, data.email, data.password);
+    this.props.requestRegistration(data.name, data.email, data.password);
     e.target.reset();
     this.setState({ nameIsInvalid: true, emailIsInvalid: true, passwordIsInvalid: true })
   }
