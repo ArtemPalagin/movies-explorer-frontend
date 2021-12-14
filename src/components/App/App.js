@@ -111,6 +111,7 @@ class App extends React.Component {
   }
   submitProfile = (name, email) => {
     mainApi.patchUser(name, email).then((user) => {
+      console.log("Редактирование профиля прошло успешно");
       this.setState({ currentUser: user.data, profileErrorMessage: "", });
       localStorage.setItem('user', JSON.stringify(user.data));
     }).catch((err) => {
