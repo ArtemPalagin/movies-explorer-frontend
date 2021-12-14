@@ -1,0 +1,187 @@
+.techs{
+  background-color: #272727;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.techs__heading {
+  margin: 0;
+  width: auto;
+  align-self: stretch;
+  border-bottom: #DADADA 1px solid;
+  font-style: normal;
+  font-weight: 400;
+  text-align: left;
+}
+.techs__title{
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+}
+.techs__text{
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: -0.04em;
+  max-width: 460px;
+}
+.techs__list{
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px 10px;
+}
+.techs__techniligy{
+  list-style-type: none;
+  width: 100%;
+  background-color: #303030;
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+  padding-top: 21px;
+  padding-bottom: 21px;
+  border-radius: 10px;
+}
+@media screen and (max-width: 320px){
+  .techs{
+    padding-left: calc((100vw - 13.7px)/14 + (-34px/7));
+    padding-right: calc((100vw - 13.7px)/14 + (-34px/7));
+    padding-top: calc((100vw - 13.7px)*5/112 + (390px/7));
+    padding-bottom: calc((100vw - 13.7px)*5/112 + (390px/7));
+  }
+  .techs__heading{
+    padding-bottom: calc((100vw - 13.7px)*-5/448 + (221px/7));
+    font-size: calc((100vw - 13.7px)/112 + (106px/7));
+    line-height: calc((100vw - 13.7px)*5/448 + (129px/7));
+    margin-bottom: calc((100vw - 13.7px)*5/224 + (370px/7));
+  }
+  .techs__title{
+    font-size: calc((100vw - 13.7px)*5/112 + (110px/7));
+    line-height: calc((100vw - 13.7px)*11/224 + (142px/7));
+    margin-bottom: 24px;
+  }
+  .techs__text{
+    font-size: calc((100vw - 13.7px)/448 + (72px/7));
+    line-height: calc((100vw - 13.7px)/224 + (102px/7));
+    margin-bottom: 50px;
+  }
+  .techs__list{
+    grid-template-columns: repeat(1, 1fr);
+    width: calc((100vw - 13.7px)*235/224 + (-1104px/7));
+  }
+  .techs__techniligy{
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 372px){
+  .techs__list{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (min-width: 372px) and (max-width: 534px){
+  .techs__list{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 534px) and (max-width: 768px){
+  .techs__list{
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 768px){
+  .techs{
+    padding-left: calc((100vw - 13.7px)/14 + (-34px/7));
+    padding-right: calc((100vw - 13.7px)/14 + (-34px/7));
+    padding-top: calc((100vw - 13.7px)*5/112 + (390px/7));
+    padding-bottom: calc((100vw - 13.7px)*5/112 + (390px/7));
+  }
+  .techs__heading{
+    padding-bottom: calc((100vw - 13.7px)*-5/448 + (221px/7));
+    font-size: calc((100vw - 13.7px)/112 + (106px/7));
+    line-height: calc((100vw - 13.7px)*5/448 + (129px/7));
+    margin-bottom: calc((100vw - 13.7px)*5/224 + (370px/7));
+  }
+  .techs__title{
+    font-size: calc((100vw - 13.7px)*5/112 + (110px/7));
+    line-height: calc((100vw - 13.7px)*11/224 + (142px/7));
+    margin-bottom: calc((100vw - 13.7px)/-224 + (178px/7));
+  }
+  .techs__text{
+    font-size: calc((100vw - 13.7px)/448 + (72px/7));
+    line-height: calc((100vw - 13.7px)/224 + (102px/7));
+    margin-bottom: calc((100vw - 13.7px)*33/448 + (185px/7));
+  }
+  .techs__list{
+    width: calc((100vw - 13.7px)*235/224 + (-1104px/7));
+  }
+  .techs__techniligy{
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1280px){
+  .techs{
+    padding-left: calc((100vw - 13.7px)*5/128 + (20px));
+    padding-right: calc((100vw - 13.7px)*5/128 + (20px));
+    padding-top: calc((100vw - 13.7px)*5/128 + (60px));
+    padding-bottom: calc((100vw - 13.7px)*5/128 + (60px));
+  }
+  .techs__heading{
+    padding-bottom: calc((100vw - 13.7px)*-5/448 + (221px/7));
+    font-size: calc((100vw - 13.7px)/112 + (106px/7));
+    line-height: calc((100vw - 13.7px)*5/448 + (129px/7));
+    margin-bottom: calc((100vw - 13.7px)*5/224 + (370px/7));
+  }
+  .techs__title{
+    font-size: 50px;
+    line-height: 58px;
+    margin-bottom: calc((100vw - 13.7px)/128 + (16px));
+  }
+  .techs__text{
+  font-size: calc((100vw - 13.7px)/256 + (9px));
+  line-height: calc((100vw - 13.7px)/256 + (15px));
+  margin-bottom: calc((100vw - 13.7px)*17/512 + (115px/2));
+  }
+  .techs__list{
+    grid-template-columns: repeat(7, 1fr);
+    width: calc((100vw - 13.7px)*21/256 + (585px));
+  }
+  .techs__techniligy{
+  font-size: calc((100vw - 13.7px)/256 + (9px));
+  line-height: calc((100vw - 13.7px)*3/512 + (19px/2));
+  }
+}
+@media screen and (min-width: 1280px){
+  .techs{
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-top: 110px;
+    padding-bottom: 110px;
+  }
+  .techs__heading{
+    padding-bottom: 23px;
+    font-size: 22px;
+    line-height: 27px;
+    margin-bottom: 70px;
+  }
+  .techs__title{
+    font-size: 50px;
+    line-height: 58px;
+    margin-bottom: 26px;
+  }
+  .techs__text{
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 100px;
+  }
+  .techs__list{
+    grid-template-columns: repeat(7, 1fr);
+    width: calc((100vw - 13.7px)*21/256 + (585px));
+  }
+  .techs__techniligy{
+    font-size: calc((100vw - 13.7px)/256 + (9px));
+    line-height: calc((100vw - 13.7px)*3/512 + (19px/2));
+  }
+}

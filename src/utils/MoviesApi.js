@@ -1,0 +1,16 @@
+import { handleStatus } from "./utils.js";
+
+export class MoviesApi {
+  constructor(options) {
+    this._baseUrl = options.baseUrl;
+    this.contentType = options.contentType;
+  }
+  getMoviesFromServer() {
+    return fetch(`${this._baseUrl}`).then(handleStatus)
+  }
+}
+const moviesApi = new MoviesApi({
+  baseUrl: "https://api.nomoreparties.co/beatfilm-movies",
+});
+
+export default moviesApi;

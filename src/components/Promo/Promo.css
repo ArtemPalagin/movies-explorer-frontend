@@ -1,0 +1,89 @@
+.promo{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #073042;
+  width: 100%;
+  overflow: hidden;
+}
+.promo__logo{
+  position: absolute;
+  height: 230px;
+}
+.promo__heading{
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  text-align: center;
+  max-width:  548px;
+}
+@media screen and (max-width: 320px){
+  .promo__heading{
+      font-size: 31px;
+      line-height: 39px;
+      margin: 0;
+      margin-top: 183px;
+      font-size: 31px;
+      line-height: 39px;
+  }
+  .promo{
+    height: 630px;
+    align-items: center;
+  }
+  .promo__logo{
+    top: calc((100vw - 13.7px)*23/56 + (1600px/7));
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 769px){
+  .promo__heading{
+      font-size: calc((100vw - 13.7px)*19/448 + (122px/7));
+      line-height: calc((100vw - 13.7px)*19/448 + (178px/7));
+      margin: 0;
+      margin-top: calc((100vw - 13.7px)*117/448 + (696px/7));
+      font-size: calc((100vw - 13.7px)*9/448 + (172px/7));
+      line-height: calc((100vw - 13.7px)*13/448 + (208px/7));
+  }
+  .promo{
+    height: calc((100vw - 13.7px)*107/224 + (3340px/7));
+    align-items: center;
+  }
+  .promo__logo{
+    top: calc((100vw - 13.7px)*23/56 + (1600px/7));
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 1280px){
+  .promo__heading{
+      font-size: 50px;
+      line-height: 58px;
+      margin-top: calc((100vw - 13.7px)*-125/256 + (676px));
+      margin-left: 70px;
+      font-size: 40px;
+      line-height: 52px;
+  }
+  .promo{
+    height: calc((100vw - 13.7px)*-71/128 + 1270px);
+    align-items: flex-start;
+  }
+  .promo__logo{
+    right: 70px;
+    top: calc((100vw - 13.7px)*-9/16 + (976px));
+  }
+}
+@media screen and (min-width: 1280px){
+  .promo__heading{
+      font-size: 50px;
+      line-height: 58px;
+      margin-top: 50px;
+      margin-left: 70px;
+      font-size: 40px;
+      line-height: 52px;
+  }
+  .promo{
+    height: 560px;
+    align-items: flex-start;
+  }
+  .promo__logo{
+    right: 70px;
+    top: 256px;
+  }
+}

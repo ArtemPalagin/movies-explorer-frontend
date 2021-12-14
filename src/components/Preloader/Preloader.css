@@ -1,0 +1,28 @@
+.preloader{
+  align-self: center;
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+  border: 8px solid transparent;
+  border-left: 8px #09506e solid;
+  border-right: 8px #09506e solid;
+  border-bottom: 8px #09506e solid;
+  border-radius: 50px;
+  animation: spin 1s linear infinite;
+  background-color: transparent;
+}
+@keyframes spin{
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.preloader_inactive{
+  display: none;
+}
+.preloader__notice{
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 29px;
+  text-align: center;
+  
+}
